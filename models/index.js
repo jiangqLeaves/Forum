@@ -17,8 +17,10 @@ require('./messageModel');
 require('./replyModel');
 require('./topicModel');
 require('./userModel');
+require('./statusModel');
+
 exports.messageModel = mongoose('messageModel');
 exports.replyModel = mongoose('replyModel');
 exports.topicModel = mongoose('topicModel');
 exports.userModel = mongoose('userModel');
-
+exports.statusModel = mongoose('statusModel');
