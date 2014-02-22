@@ -13,5 +13,5 @@ var ReplySchema = new Schema({
     replyTime: {type: Date, default: Date.now}
 });
 
-mongoose.model('ReplyModel', ReplySchema);
+exports = module.exports = mongoose.model('ReplyModel', ReplySchema);
 

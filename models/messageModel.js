@@ -12,4 +12,4 @@ var MessageSchema = new Schema({
     isRead: {type: Boolean, default: false}
 });
 
-mongoose.model('MessageModel',MessageSchema);
+exports = module.exports = mongoose.model('MessageModel', MessageSchema);

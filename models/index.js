@@ -13,14 +13,14 @@ mongoose.connect(config.db, function (err) {
         console.log('connect to %s success!', config.db);
     }
 });
-require('./messageModel');
-require('./replyModel');
-require('./topicModel');
-require('./userModel');
-require('./statusModel');
 
-exports.messageModel = mongoose('messageModel');
-exports.replyModel = mongoose('replyModel');
-exports.topicModel = mongoose('topicModel');
-exports.userModel = mongoose('userModel');
-exports.statusModel = mongoose('statusModel');
+var models = {
+    messageModel: require('./messageModel'),
+    replyModel: require('./replyModel'),
+    topicModel: require('./topicModel'),
+    userModel: require('./userModel'),
+    statusModel: require('./statusModel')
+}
+
+
+exports = module.exports = models;
