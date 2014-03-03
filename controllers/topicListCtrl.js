@@ -4,10 +4,10 @@
 var TopicModel = require('../models').topicModel;
 var ReplyModel = require('../models').replyModel;
 
-var topicListCtrl = {};
+var topicListCtrl = {
+    getTopicList: function (req, res, next) {
 
-topicListCtrl.getTopicList = function (req, res, next) {
+    }
+};
 
-}
-
-exports = module.exports = topicListCtrl;
+exports.topicListCtrl = module.exports.topicListCtrl = topicListCtrl;
