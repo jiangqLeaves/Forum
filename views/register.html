@@ -1,0 +1,124 @@
+<form name="register">
+    <div class="modal-header" style="background-color: rgb(247, 247, 247);">
+        <span class="glyphicon glyphicon-remove" style="float:right" ng-click="cancel()"></span>
+        <h3>欢迎来到前端技术社区</h3>
+    </div>
+    <div class="modal-body">
+
+        <div class="row">
+            <h4 class="col-sm-8">注册</h4>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:20px;" ng-init="isNameShow=flase;isNameOK=true;">
+            <div class="col-sm-offset-1" ng-class="{'col-sm-10':!isNameOK,'col-sm-7':isNameOK}">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input name="loginName" type="text" class="form-control" placeholder="用户名" ng-model="user.loginName" ng-blur="isNameShow=true" ng-pattern="/^[a-z0-9_-]{3,16}$/" required>
+                    <span class="input-group-addon" ng-show="!isNameShow?false: register.loginName.$valid" style="color:green; ">
+                        <span class=" glyphicon glyphicon-ok"></span>
+                    </span>
+                </div>
+            </div>
+            <div class=" col-sm-4" ng-show="isNameOK=!isNameShow?false: !register.loginName.$valid">
+                <div title="" class="popover right fade in" style="display: block; margin-top: -16px; ">
+                    <div class="arrow"></div>
+                    <div class="popover-content ng-binding" ng-bind="errMsg.loginName">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:20px;" ng-init="isEmailShow=flase;isEmailOK=true">
+            <div class="col-sm-offset-1" ng-class="{'col-sm-10':!isEmailOK,'col-sm-7':isEmailOK}">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                    <input name="userMail" type="email" class="form-control" placeholder="邮箱" ng-model="user.mail" ng-blur=" isEmailShow=true" required>
+                    <span class="input-group-addon" ng-show="!isEmailShow?false: register.userMail.$valid" style="color:green; ">
+                        <span class=" glyphicon glyphicon-ok"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-4" ng-show="isEmailOK=!isEmailShow?false: !register.userMail.$valid">
+                <div title="" class="popover right fade in" style="display: block; margin-top: -9px;">
+                    <div class="arrow"></div>
+                    <div class="popover-content ng-binding" ng-bind="errMsg.email">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:20px;" ng-init="isPwdShow=flase;isPwdOK=true;">
+            <div class="col-sm-offset-1" ng-class="{'col-sm-10':!isPwdOK,'col-sm-7':isPwdOK}">
+                <div class=" input-group input-group-lg">
+                    <span class=" input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input name="pwd" type="password" class="form-control" placeholder="密码" ng-model="user.password" ng-blur="isPwdShow=true" ng-pattern="/^[\w\-~!@#$%^&*()+{}[ \]:,.\/]{6,18}$/" required />
+                    <span class="input-group-addon" ng-show="!isPwdShow?false: register.pwd.$valid" style="color:green; ">
+                        <span class=" glyphicon glyphicon-ok">
+                        </span>
+                    </span>
+                </div>
+
+            </div>
+            <div class="col-sm-4" ng-show="isPwdOK=!isPwdShow?false: !register.pwd.$valid">
+                <div title="" class="popover right fade in" style="display: block; margin-top:-16px;">
+                    <div class="arrow"></div>
+                    <div class="popover-content ng-binding" ng-bind="errMsg.password">
+                    </div>
+                </div>
+                <div ng-show="!isPwdShow?false: register.pwd.$valid" style="display:table-cell;color:green;" class="">
+                    <span class=" glyphicon glyphicon-ok">
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-sm-offset-1 col-sm-10">
+                <progressbar class="progress-striped active" value="pgbVlaue" type="{{pgbType}}">{{pgbMsg}}</progressbar>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-offset-1" ng-class="{'col-sm-10':true,'col-sm-7':false}">
+                <div class="input-group input-group-lg">
+                    <span class=" input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" class="form-control" placeholder="再次输入密码" required>
+                    <span class="input-group-addon" ng-show="" style="color:green; ">
+                        <span class=" glyphicon glyphicon-ok"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-4" ng-show="">
+                <div class="popover right fade in" style="display: block;">
+                    <div class="arrow"></div>
+                    <div class="popover-content ng-binding" ng-bind="errMsg.passwordChecked">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-inline" style="margin-top:20px;">
+            <div collapse="isRedAgreement">
+                <div class="well well-lg">
+                    <h4 class="text-center">用户协议</h4>
+                    <h5>前端技术社区是前端技术爱好者的聚集地，通过这里你可以学习到新的前端技术</h5>
+                    <h5>1、.........</h5>
+                    <h5>2、.........</h5>
+                </div>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="isRedAgreement" />
+                    <a ng-click="isRedAgreement = !isRedAgreement">我已阅读并同意用户协议</a>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer " style="text-align:center">
+        <button class="btn btn-primary btn-lg" style="width:140px;" ng-click="ok()" ng-disabled="!isRedAgreement">注册</button>
+    </div>
+
+
+</form>

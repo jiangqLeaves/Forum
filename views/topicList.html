@@ -1,0 +1,42 @@
+<div class="topicList-body font">
+    <div style="display: table;width:100%; background-color: #f5f5f5; padding: 1px; padding-left: 10px;">
+        <div style="display: table-cell;width:80px;">
+            <h4>当前话题</h4>
+        </div>
+        <div class="dropdown visible-xs" style="display:table-cell;width:80px;">
+            <a class="dropdown-toggle btn">
+                {{'全部'}}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a>{{'全部'}}</a>
+                </li>
+            </ul>
+        </div>
+        <div style="display:table-cell"></div>
+    </div>
+    <tabset class="hidden-xs">
+        <tab heading="全部"></tab>
+        <tab heading="Angular"></tab>
+        <tab heading="BackBone"></tab>
+        <tab heading="BootStrap"></tab>
+        <tab heading="HTML5/CSS3"></tab>
+    </tabset>
+
+    <div style="height:700px;">
+        <div class="topicList-list " ng-repeat="topic in topicList" ng-mouseenter="selectedRow = $index"
+             ng-mouseleave="selectedRow=null"
+             ng-class="{'topicList-list-selected':$index==selectedRow}">
+            <div class="topicList-list-avatar" style="width: 55px;">
+                <img src="../public/images/images.jpg" alt="..." class="img-circle img-responsive"
+                     style="display: inline">
+            </div>
+            <div class="topicList-list-item"><a style="font-size:18px;">{{topic.theme}}</a></div>
+            <div class=" hidden-xs topicList-list-item" style="width: 100px;float: right"><p class="text-center">
+                {{topic.reply}}/{{topic.click}}</p></div>
+            <div class="topicList-list-item" style="width: 100px; float: right"><p class="text-center">
+                {{topic.lastReplyTime}}</p></div>
+        </div>
+    </div>
+</div>
