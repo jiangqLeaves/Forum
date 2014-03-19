@@ -1,7 +1,8 @@
 /**
  * Created by jiangqiang on 14-3-8.
  */
-app.controller('topicListCtrl', ['$scope', function ($scope) {
+app.controller('topicListCtrl', ['$scope','$document', function ($scope,$document) {
+    var testa=$document;
     $scope.topicList = [
         { id: '123sfd1as3da', theme: '忽然听哈迪斯噶个人', reply: '11', click: '123', lastReplyTime: '18:12' },
         { id: '123asdff4as1', theme: '请问我热热沃尔沃tertiary', reply: '234', click: '1124', lastReplyTime: '17:00' },

@@ -69,15 +69,6 @@ body {
     background-color: #f5f5f5;
 }
 
-.topicList-list-theme {
-    height: 50px;
-    line-height: 50px;
-    white-space: nowrap;
-    word-break: break-all;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
 .topicList-list-reply {
     height: 50px;
     line-height: 50px;
@@ -94,31 +85,28 @@ body {
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.topicList-list-avatar{
+
+.topicList-list-avatar {
     position: relative;
     float: left;
     padding-left: 2px;
     padding-right: 2px;
 }
-@media (max-width: 768px){
-    .topicList-list-theme {
-        height: 50px;
-        line-height: 50px;
-        white-space: nowrap;
-        word-break: break-all;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        width:calc(100% - 255px);;
-    }
-}
+
 @media (min-width: 768px) {
     .topicList-list-theme {
-        height: 50px;
-        line-height: 50px;
-        white-space: nowrap;
-        word-break: break-all;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        width:calc(100% - 155px);;
+        width: -moz-calc(100% - 255px);
+        width: -webkit-calc(100% - 255px);
+        width: calc(100% - 255px);
+        ngWidth:100% -255px;
+    }
+}
+
+@media (max-width: 768px) {
+    .topicList-list-theme {;
+        width: -moz-calc(100% - 155px);
+        width: -webkit-calc(100% - 155px);
+        width: calc(100% - 155px);
+        ngWidth:100% -155px;
     }
 }
