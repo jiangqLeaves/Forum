@@ -13,7 +13,7 @@
         </div>
 
         <div class="row" style="margin-top:20px;" ng-init="isNameShow=flase;isNameOK=true;">
-            <div class="col-sm-offset-1" ng-class="{'col-sm-10':!isNameOK,'col-sm-7':isNameOK}">
+            <div  ng-class="{'col-sm-12':!isNameOK,'col-sm-7':isNameOK}">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                     <input name="loginName" type="text" class="form-control" placeholder="用户名" ng-model="user.loginName" ng-blur="isNameShow=true" ng-pattern="/^[a-z0-9_-]{3,16}$/" required>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="row" style="margin-top:20px;" ng-init="isEmailShow=flase;isEmailOK=true">
-            <div class="col-sm-offset-1" ng-class="{'col-sm-10':!isEmailOK,'col-sm-7':isEmailOK}">
+            <div  ng-class="{'col-sm-12':!isEmailOK,'col-sm-7':isEmailOK}">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
                     <input name="userMail" type="email" class="form-control" placeholder="邮箱" ng-model="user.mail" ng-blur=" isEmailShow=true" required>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="row" style="margin-top:20px;" ng-init="isPwdShow=flase;isPwdOK=true;">
-            <div class="col-sm-offset-1" ng-class="{'col-sm-10':!isPwdOK,'col-sm-7':isPwdOK}">
+            <div  ng-class="{'col-sm-12':!isPwdOK,'col-sm-7':isPwdOK}">
                 <div class=" input-group input-group-lg">
                     <span class=" input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input name="pwd" type="password" class="form-control" placeholder="密码" ng-model="user.password" ng-blur="isPwdShow=true" ng-pattern="/^[\w\-~!@#$%^&*()+{}[ \]:,.\/]{6,18}$/" required />
@@ -76,13 +76,13 @@
 
         </div>
         <div class="row" style="margin-top:20px;">
-            <div class="col-sm-offset-1 col-sm-10">
+            <div class="col-sm-12">
                 <progressbar class="progress-striped active" value="pgbVlaue" type="{{pgbType}}">{{pgbMsg}}</progressbar>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-sm-offset-1" ng-class="{'col-sm-10':true,'col-sm-7':false}">
+            <div  ng-class="{'col-sm-12':true,'col-sm-7':false}">
                 <div class="input-group input-group-lg">
                     <span class=" input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input type="password" class="form-control" placeholder="再次输入密码" required>

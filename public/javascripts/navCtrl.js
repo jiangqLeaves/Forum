@@ -27,7 +27,7 @@ app.controller('navCtrl', ['$scope', '$modal', function ($scope, $modal) {
             backdrop: true,
             templateUrl: './register.html',
             controller: 'registerCtrl',
-            windowClass: 'modal '
+            windowClass: 'test '
         })
     }
 }]);

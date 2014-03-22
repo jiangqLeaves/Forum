@@ -1,7 +1,7 @@
 /**
  * Created by jiangqiang on 14-3-8.
  */
-var app = angular.module('indexModule', ['ui.bootstrap', 'ngRoute']);
+var app = angular.module('indexModule', ['ui.bootstrap', 'ngRoute','ngSanitize']);
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
         when('/', {

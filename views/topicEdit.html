@@ -1,5 +1,57 @@
-﻿<div>
+﻿<div class="topicList-body font forum-fadein">
 
-    <script id="editor" type="text/plain" style="width:100%;height:500px;">
-    </script>
+    <div style="display: table;width:100%; background-color: #f5f5f5; padding: 1px; padding-left: 10px;">
+        <div style="display: table-cell;width:80px;">
+            <h4>发帖</h4>
+        </div>
+        <div style="display:table-cell"></div>
+        <div style="display: table-cell;width:60px; vertical-align:middle">
+            <a href="#topicEdit" class="btn btn-info float-right" style="margin-right:5px;width:80px;">完成发布</a>
+        </div>
+    </div>
+    <div style="border-top: 1px solid #e3e3e3; padding: 10px;  ">
+        <div class="">
+            <p></p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; Markdown是一种轻量级标记语言，语法简洁明了、学习容易，而且功能比纯文本更强大，广泛的应用于博客等的书写。Stack Overflow， Reddit， GitHub 等都选择 Markdown 作为默认的写作格式。本论坛支持Markdown，您可以使用Markdown来对您的帖子编写。</p>
+        </div>
+        <div class="input-group  col-sm-8">
+            <span class="input-group-addon">主题</span>
+            <input name="topicTheme" type="text" class="form-control">
+        </div>
+
+        <div style="margin-top: 10px; ">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" ng-click="contents=''"><span class="glyphicon glyphicon-remove"></span> 清空</button>
+                <button type="button" class="btn btn-default" ng-model="radioModel"><span class="glyphicon glyphicon-saved"></span> 暂存</button>
+
+            </div>
+            <div class="btn-group" ng-init="editRadio='Right'">
+                <button type="button" class="btn btn-default" ng-model="editRadio" btn-radio="'Middle'"><span class="glyphicon glyphicon-list"></span> 同步</button>
+                <button type="button" class="btn btn-default" ng-model="editRadio" btn-radio="'Left'"><span class="glyphicon glyphicon-indent-right"></span> 预览</button>
+                <button type="button" class="btn btn-default" ng-model="editRadio" btn-radio="'Right'"><span class="glyphicon glyphicon-indent-left"></span> 编写</button>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid #e3e3e3; margin-top: 5px;height:695px;">
+            <div style="padding:5px;" ng-class="{'Left':'col-sm-12','Middle':'col-sm-6','Right':'hidden'}[editRadio]">
+                <div class="edit-title">
+                    <div style="display: table-cell;width:80px;">
+                        <h5>预览</h5>
+                    </div>
+                    <div style="display:table-cell"></div>
+                </div>
+                <div ng-bind-html="contentHtml" class="edit-body "></div>
+            </div>
+            <div style="padding:5px;" ng-class="{'Left':'hidden','Middle':'col-sm-6','Right':'col-sm-12'}[editRadio]">
+                <div class="edit-title">
+                    <div style="display: table-cell;width:80px;">
+                        <h5>编写</h5>
+                    </div>
+                    <div style="display:table-cell"></div>
+                </div>
+                <textarea class="edit-body " ng-model='contents' onkeydown="if(event.keyCode==9){this.value+='    ';return false;}"></textarea>
+            </div>
+        </div>
+        <div></div>
+    </div>
 </div>

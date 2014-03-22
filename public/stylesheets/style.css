@@ -1,6 +1,7 @@
 
 body {
     font-family: "Helvetica Neue", Helvetica, "Microsoft Yahei", "Wenquanyi Micro Hei", Arial, sans-serif;
+    background-color: #e5e5e5;
 }
 
 .font {
@@ -17,6 +18,30 @@ body {
     float: right;
 }
 
+.trans-width {
+    transition: width 0.5s;
+    -moz-transition: width 0.5s;
+    -webkit-transition: width 0.5s;
+    -o-transition: width 0.5s;
+}
+
+@-webkit-keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+/*.forum-fadein{
+     -webkit-animation: fadein 0.5s linear 2;
+}*/
+@media (min-width: 768px) {
+    .test .modal-dialog .modal-content {
+        width: 500px;
+    }
+}
 
 /*导航栏样式*/
 .nav, .pagination, .carousel, .panel-title a {
@@ -57,6 +82,7 @@ body {
 
 /**/
 .topicList-body {
+    background-color: white;
     min-height: 20px;
     /*padding: 9px;*/
     margin-bottom: 20px;
@@ -155,3 +181,22 @@ body {
         color: #428bca;
         text-decoration: none;
     }
+/*编辑帖子样式*/
+.edit-title {
+    display: table;
+    background-color: #f5f5f5;
+    padding: 1px;
+    padding-left: 10px;
+    width: 100%;
+    border: 1px solid #e3e3e3;
+    border-bottom: 0px;
+}
+
+.edit-body {
+    border: 1px solid #e3e3e3;
+    height: 650px;
+    border-radius: 0px 0px 4px 4px;
+    overflow: auto;
+    width: 100%;
+    padding: 5px;
+}
