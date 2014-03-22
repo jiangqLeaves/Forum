@@ -11,12 +11,12 @@ app.config(['$routeProvider', function ($routeProvider) {
             },
             templateUrl: 'topicList.html'
         })
-        .when('/alert', {
-            controller: 'topicListCtrl',
+        .when('/topicEdit', {
+            controller: 'topicEditCtrl',
             resolve: {
 
             },
-            templateUrl: 'topicList.html'
+            templateUrl: 'topicEdit.html'
         })
         .otherwise({ redirectTo: '/' });
 }]);
