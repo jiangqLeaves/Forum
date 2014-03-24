@@ -11,7 +11,21 @@ app.config(['$routeProvider', function ($routeProvider) {
             },
             templateUrl: 'topicList.html'
         })
-        .when('/topicEdit', {
+        .when('/Topic/:id', {//主题详细
+            controller: 'topicEditCtrl',
+            resolve: {
+
+            },
+            templateUrl: 'topicEdit.html'
+        })
+        .when('/Add', {//新增主题
+            controller: 'topicEditCtrl',
+            resolve: {
+
+            },
+            templateUrl: 'topicEdit.html'
+        })
+        .when('/Edit/:id', {//修改主题
             controller: 'topicEditCtrl',
             resolve: {
 
