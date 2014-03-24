@@ -1,7 +1,7 @@
 /**
  * Created by jiangqiang on 14-3-8.
  */
-var app = angular.module('indexModule', ['ui.bootstrap', 'ngRoute','ngSanitize']);
+var app = angular.module('indexModule', ['ui.bootstrap', 'ngRoute', 'ngSanitize']);
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
         when('/', {
@@ -12,11 +12,11 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'topicList.html'
         })
         .when('/Topic/:id', {//主题详细
-            controller: 'topicEditCtrl',
+            controller: 'topicDetailCtrl',
             resolve: {
 
             },
-            templateUrl: 'topicEdit.html'
+            templateUrl: 'topicDetail.html'
         })
         .when('/Add', {//新增主题
             controller: 'topicEditCtrl',
@@ -58,7 +58,7 @@ app.directive('ngWidth', function () {
                 case '-':
                     cssResult = cssStyle[0] - cssStyle[2];
             }
-            attrs.ngWidth=+cssResult+"px";
+            attrs.ngWidth = +cssResult + "px";
         }
     }
 })
