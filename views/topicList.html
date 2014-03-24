@@ -16,7 +16,7 @@
         </div>
         <div style="display:table-cell"></div>
         <div style="display: table-cell;width:60px; vertical-align:middle">
-            <a href="#topicEdit" class="btn btn-info float-right" style="margin-right:5px;width:80px;">发帖</a>
+            <a href="#/Add" class="btn btn-info float-right" style="margin-right:5px;width:80px;">发帖</a>
         </div>
     </div>
     <tabset class="hidden-xs">
@@ -40,7 +40,7 @@
                     <span style="color: #9e78c0">{{topic.reply}}</span>/{{topic.click}}
                 </p>
             </div>
-            <div class="topicList-list-item topicList-list-theme"><a>{{topic.theme}}</a></div>
+            <div class="topicList-list-item topicList-list-theme"><a href="#/Topic/{{topic.id}}">{{topic.theme}}</a></div>
             <div class="topicList-list-item " style="width: 80px;"><a style="font-size: 14px;">{{topic.replyName}}</a></div>
             <div class="topicList-list-item" style="width: 70px; font-size: 12px; color: #666; ">
                 <p class="text-center">
