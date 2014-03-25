@@ -6,7 +6,7 @@
         </div>
         <div style="display:table-cell"></div>
         <div style="display: table-cell;width:60px; vertical-align:middle">
-            <a href="#topicEdit" class="btn btn-info float-right" style="margin-right:5px;width:80px;">完成发布</a>
+            <a href="" class="btn btn-info float-right" style="margin-right:5px;width:80px;" ng-click="save()">完成发布</a>
         </div>
     </div>
     <div style="border-top: 1px solid #e3e3e3; padding: 10px;  ">
@@ -16,7 +16,7 @@
         </div>
         <div class="input-group  col-sm-8">
             <span class="input-group-addon">主题</span>
-            <input name="topicTheme" type="text" class="form-control">
+            <input name="topicTheme" type="text" class="form-control" ng-model="topicDetail.theme">
         </div>
 
         <div style="margin-top: 10px; ">
@@ -49,7 +49,7 @@
                     </div>
                     <div style="display:table-cell"></div>
                 </div>
-                <textarea class="edit-body " ng-model='contents' onkeydown="if(event.keyCode==9){this.value+='    ';return false;}"></textarea>
+                <textarea class="edit-body " ng-model='topicDetail.contents' onkeydown="if(event.keyCode==9){this.value+='    ';return false;}"></textarea>
             </div>
         </div>
         <div></div>

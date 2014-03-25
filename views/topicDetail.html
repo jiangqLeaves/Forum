@@ -2,14 +2,16 @@
 
     <div style="; display:table;width:100%; background-color: #f5f5f5; padding: 1px; padding-left: 10px;">
         <div style="display:table-cell">
-            <h3 class="font"><span class="glyphicon glyphicon-fire" style="color: red"></span> {{topicDetail.theme}}
+            <h3 class="font">
+                <span class="glyphicon glyphicon-fire" style="color: red"></span> {{topicDetail.theme}}
             </h3>
 
-            <p style="font-size:12px;color: #838383"><a>{{topicDetail.author}}</a> 发表于 {{topicDetail.time}}</p>
+            <p style="font-size:12px;color: #838383"><a>{{topicDetail.author}}</a> 发表于 {{topicDetail.createTime}}</p>
         </div>
         <div style="display: table-cell;width:40px;font-size: 30px;color:  #428bca ">
             <span class="glyphicon glyphicon-bookmark"></span>
         </div>
     </div>
     <div style="border-top: 1px solid #e3e3e3; padding: 10px;  "></div>
+    <div ng-bind-html="contentHtml" class="edit-body "></div>
 </div>

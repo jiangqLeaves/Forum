@@ -11,7 +11,8 @@ var topicSchema = new Schema({
     contents: String,
     type: Number,
     createTime: {type: Date, default: Date.now},
-    clickCount: {type: Date, default: 0}
+    editTime:Date,
+    clickCount: {type:Number, default: 0}
 });
 
 exports = module.exports = mongoose.model("TopicModel", topicSchema);
