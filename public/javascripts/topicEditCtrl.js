@@ -1,4 +1,4 @@
-﻿app.controller('topicEditCtrl', ['$scope','$sanitize','$routeParams','Topic', function ($scope,$sanitize,$routeParams,Topic) {
+﻿﻿app.controller('topicEditCtrl', ['$scope','$sanitize','$routeParams','Topic', function ($scope,$sanitize,$routeParams,Topic) {
     if(!$routeParams.id)
         alert("ERRO")
     else
@@ -9,3 +9,4 @@
           $scope.contentHtml=markdown.toHTML($scope.contents);
           })
     }])
+
