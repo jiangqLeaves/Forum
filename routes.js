@@ -3,6 +3,7 @@
  */
 var UserCtrl = require('./controllers').userCtrl;
 var TopicCtrl=require('./controllers').topicCtrl;
+var TopicListCtrl=require('./controllers').topicListCtrl;
 
 var routes = function (app) {
     app.get('/', function (req, res) {
@@ -16,6 +17,8 @@ var routes = function (app) {
     app.post('/user', UserCtrl.addUser);
     app.get('/user/:userID', UserCtrl.getUserInfo)
     app.post('/user/:userID', UserCtrl.editUser);
+
+    app.get('/topicList',TopicListCtrl.getTopicList)
 
 }
 

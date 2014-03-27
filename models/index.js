@@ -16,11 +16,9 @@ mongoose.connect(config.db, function (err) {
 
 var models = {
     messageModel: require('./messageModel'),
-    replyModel: require('./replyModel'),
     topicModel: require('./topicModel'),
     userModel: require('./userModel'),
     statusModel: require('./statusModel'),
-    topicListModel:require('./topicListModel')
 }
 
 

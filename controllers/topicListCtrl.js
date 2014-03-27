@@ -1,27 +1,24 @@
 /**
  * Created by jiangqiang on 14-2-22.
  */
-var TopicListModel = require('../models').topicListModel;
+var async = require('async');
+
+var topicModels = require('../models').topicModel
 
 var topicListCtrl = {
     getTopicList: function (req, res, next) {
-
+        topicModels
+            .find()
+            .sort('editTime')
+            .exec(function (err, doc) {
+                if (err) {
+                    res.send(400)
+                }
+                else {
+                    res.send(doc);
+                }
+            })
     }
 };
-var topicListMethods = {
-    addTopic: function (topic, callback) {
-        var topicListEntity = new TopicListModel(topic);
-        if (typeof callback === 'function')
-            topicListEntity.save(callback);
-        else
-            topicListEntity.save();
-    },
-    replyTopic: function () {
 
-    },
-    setTopTopic: function () {
-
-    }
-}
 exports.topicListCtrl = module.exports.topicListCtrl = topicListCtrl;
-exports.topicListMethods = module.exports.topicListMethods = topicListMethods;
