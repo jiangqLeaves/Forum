@@ -19,7 +19,8 @@ var models = {
     replyModel: require('./replyModel'),
     topicModel: require('./topicModel'),
     userModel: require('./userModel'),
-    statusModel: require('./statusModel')
+    statusModel: require('./statusModel'),
+    topicListModel:require('./topicListModel')
 }
 
 

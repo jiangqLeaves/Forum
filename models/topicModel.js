@@ -9,10 +9,8 @@ var topicSchema = new Schema({
     author: ObjectId,
     theme: String,
     contents: String,
-    type: Number,
     createTime: {type: Date, default: Date.now},
-    editTime:Date,
-    clickCount: {type:Number, default: 0}
+    editTime:Date
 });
 
 exports = module.exports = mongoose.model("TopicModel", topicSchema);
