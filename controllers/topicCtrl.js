@@ -1,7 +1,7 @@
 /**
  * Created by jiangqiang on 14-2-19.
  */
-var async = require('async');
+//var async = require('async');
 
 var TopicModel = require('../models').topicModel;
 var topicListModel = require('../models').topicListModel;
@@ -25,7 +25,7 @@ var TopicCtrl = {
     getTopic: function (req, res, next) {
         var topicId = req.params.topicId;
 
-        TopicModel.findById(topicId, function (err, data) {
+        TopicModel.getTopic(topicId, function (err, data) {
             if (err) {
                 res.send(400)
             }

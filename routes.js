@@ -18,7 +18,7 @@ var routes = function (app) {
     app.get('/user/:userID', UserCtrl.getUserInfo)
     app.post('/user/:userID', UserCtrl.editUser);
 
-    app.get('/topicList',TopicListCtrl.getTopicList)
+    app.get('/Topic',TopicListCtrl.getTopicList)
 
 }
 

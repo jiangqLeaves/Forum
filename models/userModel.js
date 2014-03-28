@@ -22,4 +22,5 @@ var UserSchema = new Schema({
     }
 });
 
+
 exports = module.exports = mongoose.model('UserModel', UserSchema);
