@@ -21,7 +21,6 @@ app.controller('registerCtrl', ['$scope', '$modalInstance', function ($scope, $m
         $scope.status = true;
         $modalInstance.close($scope.status);
     };
-
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
@@ -52,7 +51,5 @@ app.controller('registerCtrl', ['$scope', '$modalInstance', function ($scope, $m
         $scope.pgbVlaue = progressbarMsg.value[passwordLv],
             $scope.pgbType = progressbarMsg.type[passwordLv],
             $scope.pgbMsg = progressbarMsg.msg[passwordLv]
-
-
     }, true);
 }]);

@@ -6,8 +6,7 @@ var UserModel = require('../models').userModel;
 var userCtrl = {
     addUser: function (req, res, next) {
         var user = req.body;
-        var userEntity = new UserModel(user);
-        userEntity.save(function (err) {
+        UserModel.create(user, function (err, doc) {
             if (err) {
                 res.send(400, { error: '数据格式错误！' });
             }
@@ -49,7 +48,7 @@ var userCtrl = {
 };
 var userMethods = {
     getNameByID: function (id) {
-        var userName='';
+        var userName = '';
         UserModel.findOne({_id: id}, ['name'], function (err, docs) {
             userName = docs.name;
         })

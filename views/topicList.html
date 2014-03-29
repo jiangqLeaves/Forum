@@ -40,11 +40,13 @@
                     <span style="color: #9e78c0">{{topic.replyCount}}</span>/{{topic.clickCount}}
                 </p>
             </div>
-            <div class="topicList-list-item topicList-list-theme"><a href="#/Topic/{{topic._id}}">{{topic.theme}}</a></div>
-            <div class="topicList-list-item " style="width: 80px;"><a style="font-size: 14px;">{{topic.replyName}}</a></div>
-            <div class="topicList-list-item" style="width: 70px; font-size: 12px; color: #666; ">
+            <div class="topicList-list-item topicList-list-theme"><a href="#/Topic/{{topic._id}}">{{topic.theme}}</a>
+            </div>
+            <div class="topicList-list-item " style="width: 80px;"><a style="font-size: 14px;float:right">{{topic.replyName}}</a>
+            </div>
+            <div class="topicList-list-item " style="width: 70px; font-size: 12px; color: #666;float:right ">
                 <p class="text-center">
-                    {{topic.lastReplyTime}}
+                    {{dealDate(topic.replyTime)}}
                 </p>
             </div>
         </div>

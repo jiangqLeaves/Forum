@@ -21,6 +21,8 @@ var UserSchema = new Schema({
         description: String
     }
 });
-
+UserSchema.statics.register=function(user,cb){
+this.create(user,cb)
+}
 
 exports = module.exports = mongoose.model('UserModel', UserSchema);

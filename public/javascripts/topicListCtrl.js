@@ -1,7 +1,8 @@
 /**
  * Created by jiangqiang on 14-3-8.
  */
-app.controller('topicListCtrl', ['$scope', 'Topic', function ($scope, Topic) {
+app.controller('topicListCtrl', ['$scope', 'Topic','PubFunc', function ($scope, Topic,PubFunc) {
+    $scope.dealDate=PubFunc.dateToPre;
     $scope.topicList=Topic.query();
     console.log($scope.topicList);
 //    $scope.topicList = [

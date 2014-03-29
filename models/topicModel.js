@@ -17,19 +17,27 @@ var topicSchema = new Schema({
     reply: [ReplySchema],
     clickCount: {type: Number, default: '0'},
     replyCount:{type: Number, default: '0'},
-    replyTime:Date,
+    replyTime:{type: Date, default: Date.now},
     replyer:{type: ObjectId, ref: 'UserModel'}
 });
+/**
+ * 获取帖子信息并增加点击数
+ * @param id 帖子id
+ * @param cb 回调函数
+ */
 topicSchema.statics.getTopic=function(id,cb){
     this.findByIdAndUpdate( id,{ $inc: { clickCount: 1 }},cb)
     }
-
-
+/**
+ * 获取帖子列表
+ * @param page 页数
+ * @param cb 回调函数
+ */
 topicSchema.statics.getTopicList=function(page,cb){
     this
     .find()
     .select('author theme replyTime clickCount replyCount replyer')
-    .sort('replyTime')
+    .sort('-replyTime')
     .skip(0).limit(20)
     .populate({
         path: 'author',
@@ -41,4 +49,5 @@ topicSchema.statics.getTopicList=function(page,cb){
         })
     .exec(cb)
     }
+
 exports = module.exports = mongoose.model("TopicModel", topicSchema);

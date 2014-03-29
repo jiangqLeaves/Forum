@@ -7,13 +7,12 @@ var topicModels = require('../models').topicModel
 
 var topicListCtrl = {
     getTopicList: function (req, res, next) {
-
-
         topicModels.getTopicList(0,function (err, doc) {
                 if (err) {
                     res.send(400)
                 }
                 else {
+                    res.set('Cache-Control', 'no-cache');
                     res.send(doc);
                 }
             })
