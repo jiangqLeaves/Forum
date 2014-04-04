@@ -1,7 +1,6 @@
 /**
  * Created by jiangqiang on 14-2-16.
  */
-var ReplySchema = require('./replyModel');
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
@@ -14,7 +13,6 @@ var topicSchema = new Schema({
     createTime: {type: Date, default: Date.now},
     editTime: Date,
     type: {type: String, index: true},
-    reply: [ReplySchema],
     clickCount: {type: Number, default: '0'},
     replyCount:{type: Number, default: '0'},
     replyTime:{type: Date, default: Date.now},
@@ -26,16 +24,20 @@ var topicSchema = new Schema({
  * @param cb 回调函数
  */
 topicSchema.statics.getTopic=function(id,cb){
-    this.findByIdAndUpdate( id,{ $inc: { clickCount: 1 }},cb)
-    }
+    this.findByIdAndUpdate( id,{ $inc: { clickCount: 1 }})
+        .populate({
+        path: 'author',
+        select: 'name level'
+        })
+        .exec(cb)
+}
 /**
  * 获取帖子列表
  * @param page 页数
  * @param cb 回调函数
  */
 topicSchema.statics.getTopicList=function(page,cb){
-    this
-    .find()
+    this.find()
     .select('author theme replyTime clickCount replyCount replyer')
     .sort('-replyTime')
     .skip(0).limit(20)
@@ -48,6 +50,6 @@ topicSchema.statics.getTopicList=function(page,cb){
         select: 'name level'
         })
     .exec(cb)
-    }
+}
 
 exports = module.exports = mongoose.model("TopicModel", topicSchema);

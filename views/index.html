@@ -10,6 +10,7 @@
     <link href="../public/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="../public/javascripts/angular-1.2.13/angular.min.js" type="text/javascript"></script>
     <script src="../public/javascripts/angular-1.2.13/angular-route.min.js" type="text/javascript"></script>
+    <script src="../public/javascripts/angular-1.2.13/angular-animate.min.js"></script>
     <script src="../public/javascripts/angular-1.2.13/angular-sanitize.min.js" type="text/javascript"></script>
     <script src="../public/javascripts/angular-1.2.13/angular-resource.min.js"></script>
     <script src="../public/javascripts/ui-bootstrap/ui-bootstrap-tpls-0.10.0.min.js" type="text/javascript"></script>
@@ -20,7 +21,7 @@
     <script src="../public/javascripts/topicListCtrl.js" type="text/javascript"></script>
 
 </head>
-<body>
+<body ng-controller="rootCtrl">
     <header class="navbar navbar-default   navbar-fixed-top navbar-inner" ng-controller="navCtrl">
         <div class="container ">
             <div class="navbar-header">
@@ -44,46 +45,55 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li ng-show="!isLogin"><a ng-click="login()">登陆 </a></li>
+                <ul class="nav navbar-nav navbar-right" ng-show="!isLogin">
+                    <li><a ng-click="login()">登陆 </a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li ng-show="!isLogin"><a ng-click="register()">注册 </a></li>
+                <ul class="nav navbar-nav navbar-right" ng-show="!isLogin">
+                    <li><a ng-click="register()">注册 </a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li ng-show="isLogin" class="dropdown ">
+                <ul class="nav navbar-nav navbar-right" ng-show="isLogin">
+                    <li class="dropdown ">
                         <a class="dropdown-toggle" role="button">
-                            好脾气的白菜
+                            {{User.name}}
                             <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-left" style="width:inherit">
-                            <li><a href="#accordion">aaaa</a></li>
-                            <li><a href="#alert">Alert</a></li>
+                        <ul class="dropdown-menu" style="width:100px;min-width:100px">
+                            <li><a href="#accordion">我的主页</a></li>
+                            <li><a href="#alert">个人资料</a></li>
+                            <li><a href="#alert">我的收藏</a></li>
+                            <li><a href="#alert">草稿箱</a></li>
+                            <li style="border-top: 1px solid #e3e3e3;"><a href="#alert">退出</a></li>
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">首页</a></li>
+                <ul class="nav navbar-nav navbar-right " ng-show="isLogin">
+                    <li>
+                        <a><span class="badge" style="font-size:8px">0</span></a>
+                    </li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-home" style="font-size:16px;"></span></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right"></ul>
             </div>
         </div>
 
     </header>
-    <div style="margin-top:40px;">
-        <div class="hidden-xs" style="height:25px;"></div>
-        <div ng-view class="col-sm-offset-2 col-sm-8"></div>
+    <div style="margin-top:50px;">
+        <div class="hidden-xs" style="height:15px;"></div>
+        <div ng-view class="slide col-sm-offset-2 col-sm-8 "></div>
     </div>
-    <footer></footer>
-    <script src="../public/javascripts/loginCtrl.js" type="text/javascript"></script>
-    <script src="../public/javascripts/registerCtrl.js" type="text/javascript"></script>
-    <script src="../public/javascripts/topicEditCtrl.js" type="text/javascript"></script>
-    <script src="../public/javascripts/topicDetailCtrl.js" type="text/javascript"></script>
+    <footer>
+        <script src="../public/javascripts/loginCtrl.js" type="text/javascript"></script>
+        <script src="../public/javascripts/registerCtrl.js" type="text/javascript"></script>
+        <script src="../public/javascripts/topicEditCtrl.js" type="text/javascript"></script>
+        <script src="../public/javascripts/topicDetailCtrl.js" type="text/javascript"></script>
 
-    <script src="../public/javascripts/markdown-0.6.0/markdown.min.js"></script>
+        <script src="../public/javascripts/markdown-0.6.0/markdown.min.js"></script>
 
-    <!--<link href="/assets/themes//google-code-prettify/desert.css" rel="stylesheet" type="text/css" media="all">
-    <script type="text/javascript" src="/assets/themes//google-code-prettify/prettify.js"></script>-->
-
+        <!--<link href="/assets/themes//google-code-prettify/desert.css" rel="stylesheet" type="text/css" media="all">
+        <script type="text/javascript" src="/assets/themes//google-code-prettify/prettify.js"></script>-->
+    </footer>
 </body>
 
 </html>

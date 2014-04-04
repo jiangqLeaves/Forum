@@ -3,12 +3,32 @@
  */
 var ReplyModel=require('../models').replyModel;
 
-var replyCtrl={};
-replyCtrl.addReply=function(){
-
+var replyCtrl={
+    getReplyList:function(req, res, next){
+        var topicId=req.query.topicId;
+        ReplyModel.getReplyList(topicId,function(err,doc){
+            if (err) {
+                res.send(400, { error: '«Î«Û¥ÌŒÛ' });
+            }
+            else {
+                res.send(doc);
+            }
+        })
+    },
+    addReply:function(req,res,next){
+        var reply = req.body;
+        var topicId=reply.replyTopic;
+        reply.author=req.session._id;
+        ReplyModel.create(reply,function(err,doc){
+            if (err) {
+                res.send(400, { error: '«Î«Û¥ÌŒÛ' });
+            }
+            else {
+                res.send(doc);
+            }
+        })
+    }
 };
-replyCtrl.delReply=function(){
 
-};
 
-exports = module.exports = replyCtrl;
+exports.replyCtrl = module.exports.replyCtrl = replyCtrl;

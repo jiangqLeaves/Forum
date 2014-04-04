@@ -7,9 +7,8 @@ var ObjectId = Schema.Types.ObjectId;
 
 var UserSchema = new Schema({
     name: {type: String, index: true, unique: true},
-    loginName: {type: String, index: true, unique: true},
     password: String,
-    email: {type: String, unique: true},
+    email: {type: String,index: true, unique: true},
     createTime: {type: Date, default: Date.now },
     score: {type: Number, default: 0 },
     level: {type: Number, default: 0},

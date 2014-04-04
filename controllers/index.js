@@ -4,7 +4,8 @@
 var controllers = {
     userCtrl: require('./userCtrl').userCtrl,
     topicCtrl:require('./topicCtrl').TopicCtrl,
-    topicListCtrl:require('./topicListCtrl').topicListCtrl
+    topicListCtrl:require('./topicListCtrl').topicListCtrl,
+    replyCtrl:require('./replyCtrl').replyCtrl
 }
 
 exports = module.exports = controllers;

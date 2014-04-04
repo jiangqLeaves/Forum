@@ -13,10 +13,10 @@
         </div>
 
         <div class="row" style="margin-top:20px;" ng-init="isNameShow=flase;isNameOK=true;">
-            <div  ng-class="{'col-sm-12':!isNameOK,'col-sm-7':isNameOK}">
+            <div ng-class="{'col-sm-12':!isNameOK,'col-sm-7':isNameOK}">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input name="loginName" type="text" class="form-control" placeholder="用户名" ng-model="user.loginName" ng-blur="isNameShow=true" ng-pattern="/^[a-z0-9_-]{3,16}$/" required>
+                    <input name="loginName" type="text" class="form-control" placeholder="用户名" ng-model="user.name" ng-blur="isNameShow=true" ng-pattern="/^[a-z0-9_-]{3,16}$/" required>
                     <span class="input-group-addon" ng-show="!isNameShow?false: register.loginName.$valid" style="color:green; ">
                         <span class=" glyphicon glyphicon-ok"></span>
                     </span>
@@ -32,10 +32,10 @@
         </div>
 
         <div class="row" style="margin-top:20px;" ng-init="isEmailShow=flase;isEmailOK=true">
-            <div  ng-class="{'col-sm-12':!isEmailOK,'col-sm-7':isEmailOK}">
+            <div ng-class="{'col-sm-12':!isEmailOK,'col-sm-7':isEmailOK}">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                    <input name="userMail" type="email" class="form-control" placeholder="邮箱" ng-model="user.mail" ng-blur=" isEmailShow=true" required>
+                    <input name="userMail" type="email" class="form-control" placeholder="邮箱" ng-model="user.email" ng-blur=" isEmailShow=true" required>
                     <span class="input-group-addon" ng-show="!isEmailShow?false: register.userMail.$valid" style="color:green; ">
                         <span class=" glyphicon glyphicon-ok"></span>
                     </span>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="row" style="margin-top:20px;" ng-init="isPwdShow=flase;isPwdOK=true;">
-            <div  ng-class="{'col-sm-12':!isPwdOK,'col-sm-7':isPwdOK}">
+            <div ng-class="{'col-sm-12':!isPwdOK,'col-sm-7':isPwdOK}">
                 <div class=" input-group input-group-lg">
                     <span class=" input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input name="pwd" type="password" class="form-control" placeholder="密码" ng-model="user.password" ng-blur="isPwdShow=true" ng-pattern="/^[\w\-~!@#$%^&*()+{}[ \]:,.\/]{6,18}$/" required />
@@ -68,10 +68,6 @@
                     <div class="popover-content ng-binding" ng-bind="errMsg.password">
                     </div>
                 </div>
-                <div ng-show="!isPwdShow?false: register.pwd.$valid" style="display:table-cell;color:green;" class="">
-                    <span class=" glyphicon glyphicon-ok">
-                    </span>
-                </div>
             </div>
 
         </div>
@@ -81,17 +77,17 @@
             </div>
         </div>
 
-        <div class="row">
-            <div  ng-class="{'col-sm-12':true,'col-sm-7':false}">
+        <div class="row" ng-init="isPwdChecked=false;isPwdCheckOk=true">
+            <div ng-class="{'col-sm-12':!isPwdCheckOk,'col-sm-7':isPwdCheckOk}">
                 <div class="input-group input-group-lg">
                     <span class=" input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" class="form-control" placeholder="再次输入密码" required>
-                    <span class="input-group-addon" ng-show="" style="color:green; ">
+                    <input type="password" class="form-control" placeholder="再次输入密码" ng-model="pwdCheck" ng-blur="isPwdChecked=true" required>
+                    <span class="input-group-addon" ng-show="!isPwdChecked?false:(pwdCheck==user.password)" style="color:green; ">
                         <span class=" glyphicon glyphicon-ok"></span>
                     </span>
                 </div>
             </div>
-            <div class="col-sm-4" ng-show="">
+            <div class="col-sm-4" ng-show="isPwdCheckOk=!isPwdChecked?false:(pwdCheck!=user.password)">
                 <div class="popover right fade in" style="display: block;">
                     <div class="arrow"></div>
                     <div class="popover-content ng-binding" ng-bind="errMsg.passwordChecked">
@@ -117,7 +113,7 @@
         </div>
     </div>
     <div class="modal-footer " style="text-align:center">
-        <button class="btn btn-primary btn-lg" style="width:140px;" ng-click="ok()" ng-disabled="!isRedAgreement">注册</button>
+        <button class="btn btn-primary btn-lg" style="width:140px;" ng-click="userRegister()" ng-disabled="!isRedAgreement">注册</button>
     </div>
 
 

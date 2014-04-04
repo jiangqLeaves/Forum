@@ -14,6 +14,7 @@ var TopicCtrl = {
      */
     addTopic: function (req, res, next) {
         var topic = req.body;
+        topic.author=req.session._id;
         var topicEntity = new TopicModel(topic);
         topicEntity.save(function (err, doc) {
             if (err) {

@@ -3,6 +3,7 @@
  */
 app.controller('navCtrl', ['$scope', '$modal', function ($scope, $modal) {
     $scope.isLogin = false;
+    $scope.isAdmin=false;
     $scope.myClick = function () {
         alert("you have clicked me");
     }
@@ -11,15 +12,14 @@ app.controller('navCtrl', ['$scope', '$modal', function ($scope, $modal) {
         var modalInstance = $modal.open({
             templateUrl: './login.html',
             controller: 'loginCtrl',
-
-            resolve: {
-                isLogin: function () {
-                    return $scope.status;
-                }
-            }
         });
-        modalInstance.result.then(function (isLogin) {
-            $scope.isLogin = isLogin;
+        modalInstance.result.then(function (resultData) {
+            var msg={
+                isLogin:resultData.isLogin,
+                isAdmin:false
+                };
+            $scope.$emit("setUserStatus", msg);
+            $scope.User=resultData.user;
         });
     };
     $scope.register = function () {
@@ -27,7 +27,21 @@ app.controller('navCtrl', ['$scope', '$modal', function ($scope, $modal) {
             backdrop: true,
             templateUrl: './register.html',
             controller: 'registerCtrl',
-            windowClass: 'test '
-        })
+            windowClass: 'register '
+
+        });
+        modalInstance.result.then(function (resultData) {
+            var msg={
+                isLogin:resultData.isLogin,
+                isAdmin:false
+                };
+            $scope.$emit('setUserStatus', msg);
+            $scope.User=resultData.user;
+        });
     }
+    $scope.$on('UserStatus',function(event, msg){
+        $scope.isLogin=msg.isLogin;
+        $scope.isAdmin=msg.isAdmin;
+    })
+
 }]);

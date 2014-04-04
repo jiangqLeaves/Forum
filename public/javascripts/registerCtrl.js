@@ -1,9 +1,11 @@
 /**
  * Created by jiangqiang on 14-3-8.
  */
-app.controller('registerCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
-    $scope.status = false;
+app.controller('registerCtrl', ['$scope', '$modalInstance','User', function ($scope, $modalInstance,User) {
 
+    $scope.user=new User();
+
+    $scope.status = false;
     $scope.isRedAgreement = true;
     $scope.errMsg = {
         loginName: '您输入的用户名格式不正确，请输入3-18位之间的英文字符',
@@ -11,30 +13,21 @@ app.controller('registerCtrl', ['$scope', '$modalInstance', function ($scope, $m
         password: '您输入的密码格式不正确，请输入6-18位之间的英文字符',
         passwordChecked: '您两次输入的密码不一致'
     }
-    $scope.user = {
-        loginName: '',
-        email: '',
-        password: '',
-        passwordChecked: ''
-    }
-    $scope.ok = function () {
-        $scope.status = true;
-        $modalInstance.close($scope.status);
-    };
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
-    $scope.progressbarValue = 50;
     //密码强度校验
     var progressbarMsg = {
         value: [0, 25, 50, 75, 100],
         type: ['', 'danger', 'warning', 'info', 'success'],
-        msg: ['aa', '不安全', '一般', '安全', '非常安全']
+        msg: ['', '不安全', '一般', '安全', '非常安全']
     }
-    $scope.$watch(function () {
-        return $scope.user.password
-    }, function (newValue, oldValue, scope) {
-        //if (newValue === oldValue) return;
+    $scope.$watch(
+        function () {
+            return $scope.user.password
+        }, 
+        function (newValue, oldValue, scope) {
+        if (newValue === oldValue) return;
         var passwordLv = 0;
         if ($scope.user.password.match(/[a-z]/ig)) {
             passwordLv++;
@@ -52,4 +45,13 @@ app.controller('registerCtrl', ['$scope', '$modalInstance', function ($scope, $m
             $scope.pgbType = progressbarMsg.type[passwordLv],
             $scope.pgbMsg = progressbarMsg.msg[passwordLv]
     }, true);
+    $scope.userRegister = function () {
+        $scope.user.$save(function(data){
+            var result={};
+            result.isLogin = true;
+            result.user = data;
+            $modalInstance.close(result);
+            })    
+    };
+    
 }]);

@@ -25,7 +25,7 @@ body {
     -o-transition: width 0.5s;
 }
 
-@-webkit-keyframes fadein {
+/*@-webkit-keyframes fadein {
     0% {
         opacity: 0;
     }
@@ -33,12 +33,35 @@ body {
     100% {
         opacity: 1;
     }
-}
-/*.forum-fadein{
-     -webkit-animation: fadein 0.5s linear 2;
 }*/
+
+.slide.ng-enter, .slide.ng-leave {
+    -webkit-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+}
+
+.slide.ng-enter {
+    opacity: 0;
+}
+
+.slide.ng-enter-active {
+    opacity: 1;
+}
+
+.slide.ng-leave {
+    display: none;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+/*.forum-fadein {
+    -webkit-animation: fadein 0.5s linear 2;
+}*/
+
 @media (min-width: 768px) {
-    .test .modal-dialog .modal-content {
+    .register .modal-dialog .modal-content {
         width: 500px;
     }
 }
@@ -200,3 +223,17 @@ body {
     width: 100%;
     padding: 5px;
 }
+
+.reply-list {
+    border-bottom: 1px solid #e3e3e3;
+    padding: 10px 0px 10px 0px;
+}
+
+.child-reply-list {
+    border-bottom: 1px solid #e3e3e3;
+    padding: 10px 0px 10px 0px;
+}
+
+/*.reply-list p {
+    line-height: 25px;
+}*/

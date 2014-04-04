@@ -19,6 +19,7 @@ var models = {
     topicModel: require('./topicModel'),
     userModel: require('./userModel'),
     statusModel: require('./statusModel'),
+    replyModel: require('./replyModel')
 }
 
 

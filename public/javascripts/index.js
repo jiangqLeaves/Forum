@@ -1,7 +1,7 @@
 /**
  * Created by jiangqiang on 14-3-8.
  */
-var app = angular.module('indexModule', ['ui.bootstrap', 'ngRoute', 'ngSanitize', 'ngResource']);
+var app = angular.module('indexModule', ['ui.bootstrap', 'ngRoute', 'ngSanitize', 'ngResource','ngAnimate']);
 /**
  * 路由配置
  */
@@ -38,34 +38,23 @@ app.config(['$routeProvider', function ($routeProvider) {
         .otherwise({ redirectTo: '/' });
 }]);
 /**
- * 指令
- * ngWidth:功能用法同calc(),解决移动设备部分浏览器不支持css3的calc()
- * 如：{ngWidth:100% - 20px;}
+ *
  */
-app.directive('ngWidth', function () {
-    return{
-        restrict: 'C',
-        link: function (scope, element, attrs) {
-            var parentWidth = element.parent()[0].clientWidth;
-            var cssStyle = attrs.ngWidth;
-            var cssStyle = cssStyle.slice(' ');
-            for (var mStyle in cssStyle) {
-                if (mStyle.indexOf.indexOf('%') >= 0)
-                    mStyle = parentWidth * parseFloat(mStyle).toFixed(2) / 100;
-                if (mStyle.indexOf('px') >= 0)
-                    mStyle = parseFloat(mStyle);
-            }
-            var cssResult
-            switch (cssStyle[1]) {
-                case '+':
-                    cssResult = cssStyle[0] + cssStyle[2];
-                case '-':
-                    cssResult = cssStyle[0] - cssStyle[2];
-            }
-            attrs.ngWidth = +cssResult + "px";
+app.controller('rootCtrl',['$scope',function($scope){
+    var UserStatus={
+            isLogin:false,
+            isAdmin:false
         }
-    }
-})
+    $scope.$on('setUserStatus',function (event, msg) {
+        UserStatus.isLogin=msg.isLogin;
+        UserStatus.isAdmin=msg.isAdmin;
+        $scope.$broadcast("UserStatus", UserStatus);
+      });
+    $scope.$on('getUserStatus',function (event, msg) {
+        $scope.$broadcast("UserStatus", UserStatus);
+      });
+}])
+
 /**
  * 服务：主题操作
  */
@@ -75,13 +64,45 @@ app.factory('Topic', ['$resource', function ($resource) {
 /**
  * 服务：用户操作
  */
-app.factory('User',['$http',function($http){
+app.factory('User',['$resource',function($resource){
+    return $resource('/User/:userId');
+}]);
+/**
+ * 服务：用户登录注销
+ */
+app.factory('Login',['$http',function($http){
     return{
-        register:function(cb){
-
+        login:function(data,success,error){
+            $http.post('/login',data)
+            .success(success)
+            .error(error)
+            }
+        }
+}]);
+/**
+ * 服务：回复操作
+ */
+app.factory('Reply',['$resource',function($resource){
+    return $resource('/Reply/:replyId');
+}]);
+/**
+ *
+ */
+app.factory('Message',['$modal',function($modal){
+    return{
+        alert:function(cb){ 
+            var modalInstance = $modal.open({
+            templateUrl: './login.html',
+            controller: 'loginCtrl',
+        });
+        modalInstance.result.then(cb);
         }
     }
+
 }])
+/**
+ * 服务: 公用方法
+ */
 app.factory('PubFunc', function () {
         var PubFunc = {};
         PubFunc.dateToPre = function (date) {
@@ -117,6 +138,33 @@ app.factory('PubFunc', function () {
             return returnVal;
         }
         return PubFunc;
+    })
+/**
+ * 指令
+ * ngWidth:功能用法同calc(),解决移动设备部分浏览器不支持css3的calc()
+ * 如：{ngWidth:100% - 20px;}
+ */
+app.directive('ngWidth', function () {
+    return{
+        restrict: 'C',
+        link: function (scope, element, attrs) {
+            var parentWidth = element.parent()[0].clientWidth;
+            var cssStyle = attrs.ngWidth;
+            var cssStyle = cssStyle.slice(' ');
+            for (var mStyle in cssStyle) {
+                if (mStyle.indexOf.indexOf('%') >= 0)
+                    mStyle = parentWidth * parseFloat(mStyle).toFixed(2) / 100;
+                if (mStyle.indexOf('px') >= 0)
+                    mStyle = parseFloat(mStyle);
+            }
+            var cssResult
+            switch (cssStyle[1]) {
+                case '+':
+                    cssResult = cssStyle[0] + cssStyle[2];
+                case '-':
+                    cssResult = cssStyle[0] - cssStyle[2];
+            }
+            attrs.ngWidth = +cssResult + "px";
+        }
     }
-)
-
+})

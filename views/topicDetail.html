@@ -1,17 +1,59 @@
-<div class="topicList-body font forum-fadein">
-
-    <div style="; display:table;width:100%; background-color: #f5f5f5; padding: 1px; padding-left: 10px;">
+<div ng-cloak class="topicList-body font">
+    <div style="display:table;width:100%; background-color: #f5f5f5; padding: 1px; padding-left: 10px;">
         <div style="display:table-cell">
             <h3 class="font">
                 <span class="glyphicon glyphicon-fire" style="color: red"></span> {{topicDetail.theme}}
             </h3>
 
-            <p style="font-size:12px;color: #838383"><a>{{topicDetail.author}}</a> 发表于 {{topicDetail.createTime}}</p>
+            <p style="font-size:12px;color: #838383"><a>{{topicDetail.author.name}}</a>  发表于  {{topicDetail.createTime|date:'yyyy-MM-dd HH:mm'}}</p>
         </div>
-        <div style="display: table-cell;width:40px;font-size: 30px;color:  #428bca ">
+        <div style="display: table-cell;width:40px;font-size: 30px;color:  #428bca " ng-show="isLogin">
             <span class="glyphicon glyphicon-bookmark"></span>
         </div>
     </div>
-    <div style="border-top: 1px solid #e3e3e3; padding: 10px;  "></div>
-    <div ng-bind-html="contentHtml" class="edit-body "></div>
+    <div ng-bind-html="contentHtml" class="edit-body " style="padding: 15px; overflow:initial;height:100%"></div>
+</div>
+<div class="topicList-body font" style="margin-top:20px;">
+    <div style="display:table;width:100%; background-color: #f5f5f5; padding: 1px; padding-left: 10px;">
+        <div style="display:table-cell">
+            <h4>共{{}}条回复</h4>
+        </div>
+        <div style="display: table-cell;width:50px;font-size: 30px;color:  #428bca ">
+            <span class="glyphicon glyphicon-bookmark"></span>
+        </div>
+    </div>
+    <div class="edit-body " style="padding: 15px; overflow:initial;height:100%">
+        <div class="reply-list" ng-repeat="reply in replyList" style=" width: 100%;">
+            <div style="width:40px ;float:left;padding-right:5px;">
+                <img src="../public/images/images.jpg" alt="..." class="img-thumbnail img-responsive" style="display: inline" />
+            </div>
+            <div style=" margin-left:45px;">
+                <div style=" float:right">
+                    <p style="font-size:11px;color: #838383 ;padding-left:15px;"><a> {{reply.author.name}}</a>  回复于  {{reply.replyTime|date:'yyyy-MM-dd HH:mm'}}</p>
+                </div>
+                <div style=" white-space: pre; word-wrap: break-word;margin-top:7px" ng-bind-html="reply.contentHtml"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="topicList-body font" style="margin-top:20px;margin-bottom:20px;" ng-show="isLogin">
+    <div style="display: table;width:100%; background-color: #f5f5f5; padding: 0px; padding-left: 10px;">
+        <div style="display: table-cell;width:80px;">
+            <h4>回复主题</h4>
+        </div>
+        <div style="display:table-cell"></div>
+        <div style="display: table-cell;width:60px; vertical-align:middle">
+            <a class="btn btn-info float-right" style="margin-right:5px;width:80px;" ng-click="replyTopic()">回复</a>
+        </div>
+    </div>
+    <div>
+        <!--<div class="edit-title">
+            <div style="display: table-cell;width:80px;">
+                <h5>编写</h5>
+            </div>
+            <div style="display:table-cell"></div>
+        </div>-->
+        <textarea class="edit-body " style="height:250px;" ng-model='reply.contents' onkeydown="if(event.keyCode==9){this.value+='    ';return false;}"></textarea>
+    </div>
 </div>
