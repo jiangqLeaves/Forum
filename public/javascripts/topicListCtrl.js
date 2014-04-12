@@ -1,7 +1,7 @@
 /**
  * Created by jiangqiang on 14-3-8.
  */
-app.controller('topicListCtrl', ['$scope', 'Topic','PubFunc', function ($scope, Topic,PubFunc) {
+app.controller('topicListCtrl', ['$scope', 'Topic','PubFunc','Sidebar', function ($scope, Topic,PubFunc,Sidebar) {
     $scope.dealDate=PubFunc.dateToPre;
     $scope.topicList=Topic.query();
     $scope.isLogin = false;
@@ -11,4 +11,5 @@ app.controller('topicListCtrl', ['$scope', 'Topic','PubFunc', function ($scope, 
         $scope.isAdmin=msg.isAdmin;
     });
     $scope.$emit('getUserStatus', '');
+    Sidebar.setSidebar('noReply');
 }])

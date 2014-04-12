@@ -1,7 +1,7 @@
 /**
  * Created by jiangqiang on 14-3-8.
  */
-app.controller('navCtrl', ['$scope', '$modal', function ($scope, $modal) {
+app.controller('navCtrl', ['$scope', '$modal','Message', function ($scope, $modal,Message) {
     $scope.isLogin = false;
     $scope.isAdmin=false;
     $scope.myClick = function () {
@@ -43,5 +43,4 @@ app.controller('navCtrl', ['$scope', '$modal', function ($scope, $modal) {
         $scope.isLogin=msg.isLogin;
         $scope.isAdmin=msg.isAdmin;
     })
-
 }]);

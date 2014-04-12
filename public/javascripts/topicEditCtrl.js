@@ -1,5 +1,5 @@
-﻿app.controller('topicEditCtrl', ['$scope', '$sanitize', '$routeParams', '$location', 'Topic',
-    function ($scope, $sanitize, $routeParams, $location, Topic) {
+﻿app.controller('topicEditCtrl', ['$scope', '$sanitize', '$routeParams', '$location', 'Topic','Message',
+    function ($scope, $sanitize, $routeParams, $location, Topic,Message) {
         var isNew = false;
 
         if (!$routeParams.id) {
@@ -22,7 +22,10 @@
                 $scope.topicDetail.editTime = new Date();
             }
             $scope.topicDetail.$save(function (data) {
+                Message.success('发布成功');
                 $location.path('/Topic/'+data._id);
+            },function(data){
+                Message.error('发布失败，错误：'+data.error);
             })
         }
     }])

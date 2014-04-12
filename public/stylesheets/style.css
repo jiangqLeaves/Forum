@@ -1,4 +1,4 @@
-
+/*公用样式*/
 body {
     font-family: "Helvetica Neue", Helvetica, "Microsoft Yahei", "Wenquanyi Micro Hei", Arial, sans-serif;
     background-color: #e5e5e5;
@@ -25,19 +25,9 @@ body {
     -o-transition: width 0.5s;
 }
 
-/*@-webkit-keyframes fadein {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}*/
-
 .slide.ng-enter, .slide.ng-leave {
-    -webkit-transition: 0.5s linear all;
-    transition: 0.5s linear all;
+    -webkit-transition: 0.3s linear all;
+    transition: 0.3s linear all;
 }
 
 .slide.ng-enter {
@@ -49,23 +39,37 @@ body {
 }
 
 .slide.ng-leave {
-    display: none;
+    opacity: 1;
+}
+.slide.ng-leave-active {
+    opacity: 0;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
 
-/*.forum-fadein {
-    -webkit-animation: fadein 0.5s linear 2;
-}*/
-
+/*提示框样式*/
 @media (min-width: 768px) {
-    .register .modal-dialog .modal-content {
-        width: 500px;
+    .message {
+        position:fixed;
+        right:5px;
+        bottom:5px;
+        width:200px;
+
     }
 }
 
+@media (max-width: 768px) {
+    .message {
+        position:fixed;
+        /*right:5px;*/
+        bottom:0px;
+        width:100%;
+    }
+}
+
+.message
 /*导航栏样式*/
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
@@ -101,6 +105,12 @@ body {
 /*注册、登陆样式*/
 .glyphicon-remove:hover {
     cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .register .modal-dialog .modal-content {
+        width: 500px;
+    }
 }
 
 /**/
@@ -188,15 +198,6 @@ body {
     font-size: 16px;
     cursor: pointer;
     color: black;
-    /*transition: font-size 0.2s ease;
-        -moz-transition: font-size 0.2s ease; 
-        -webkit-transition: font-size 0.2s ease;
-        -o-transition: font-size 0.2s ease;*/
-    /*-webkit-transform: translateZ(0);
-        -moz-transform: translateZ(0);
-        -ms-transform: translateZ(0);
-        -o-transform: translateZ(0);
-        transform: translateZ(0);*/
 }
 
     .topicList-list-theme a:focus, a:hover {
@@ -233,7 +234,3 @@ body {
     border-bottom: 1px solid #e3e3e3;
     padding: 10px 0px 10px 0px;
 }
-
-/*.reply-list p {
-    line-height: 25px;
-}*/
