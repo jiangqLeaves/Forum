@@ -18,6 +18,11 @@ var topicSchema = new Schema({
     replyTime:{type: Date, default: Date.now},
     replyer:{type: ObjectId, ref: 'UserModel'}
 });
+
+topicSchema.statics.replyTopic=function(id,cb){
+    this.findByIdAndUpdate( id,{ $inc: { replyCount: 1 }})
+        .exec(cb)
+}
 /**
  * 获取帖子信息并增加点击数
  * @param id 帖子id
