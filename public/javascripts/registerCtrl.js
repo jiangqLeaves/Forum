@@ -1,9 +1,9 @@
 /**
  * Created by jiangqiang on 14-3-8.
  */
-app.controller('registerCtrl', ['$scope', '$modalInstance','User', function ($scope, $modalInstance,User) {
+app.controller( 'registerCtrl', ['$scope', '$modalInstance', 'User', function ( $scope, $modalInstance, User ) {
 
-    $scope.user=new User();
+    $scope.user = new User();
 
     $scope.status = false;
     $scope.isRedAgreement = true;
@@ -14,7 +14,7 @@ app.controller('registerCtrl', ['$scope', '$modalInstance','User', function ($sc
         passwordChecked: '您两次输入的密码不一致'
     }
     $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
+        $modalInstance.dismiss( 'cancel' );
     };
     //密码强度校验
     var progressbarMsg = {
@@ -25,33 +25,33 @@ app.controller('registerCtrl', ['$scope', '$modalInstance','User', function ($sc
     $scope.$watch(
         function () {
             return $scope.user.password
-        }, 
-        function (newValue, oldValue, scope) {
-        if (newValue === oldValue) return;
-        var passwordLv = 0;
-        if ($scope.user.password.match(/[a-z]/ig)) {
-            passwordLv++;
-        }
-        if ($scope.user.password.match(/[0-9]/ig)) {
-            passwordLv++;
-        }
-        if ($scope.user.password.match(/(.[^a-z0-9])/ig)) {
-            passwordLv++;
-        }
-        if ($scope.user.password.length > 12) {
-            passwordLv++;
-        }
-        $scope.pgbVlaue = progressbarMsg.value[passwordLv],
+        },
+        function ( newValue, oldValue, scope ) {
+            if ( newValue === oldValue ) return;
+            var passwordLv = 0;
+            if ( $scope.user.password.match( /[a-z]/ig ) ) {
+                passwordLv++;
+            }
+            if ( $scope.user.password.match( /[0-9]/ig ) ) {
+                passwordLv++;
+            }
+            if ( $scope.user.password.match( /(.[^a-z0-9])/ig ) ) {
+                passwordLv++;
+            }
+            if ( $scope.user.password.length > 12 ) {
+                passwordLv++;
+            }
+            $scope.pgbVlaue = progressbarMsg.value[passwordLv],
             $scope.pgbType = progressbarMsg.type[passwordLv],
             $scope.pgbMsg = progressbarMsg.msg[passwordLv]
-    }, true);
+    }, true );
     $scope.userRegister = function () {
-        $scope.user.$save(function(data){
-            var result={};
+        $scope.user.$save( function ( data ) {
+            var result = {};
             result.isLogin = true;
             result.user = data;
-            $modalInstance.close(result);
-            })    
+            $modalInstance.close( result );
+        })
     };
-    
-}]);
+
+}] );
