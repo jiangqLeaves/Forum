@@ -1,27 +1,35 @@
 /**
  * Created by jiangqiang on 14-2-15.
  */
-var mongoose = require('mongoose');
+var mongoose = require( 'mongoose' );
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
-var UserSchema = new Schema({
-    name: {type: String, index: true, unique: true},
+var UserSchema = new Schema( {
+    name: { type: String, index: true, unique: true },
     password: String,
-    email: {type: String,index: true, unique: true},
-    createTime: {type: Date, default: Date.now },
-    score: {type: Number, default: 0 },
-    level: {type: Number, default: 0},
+    email: { type: String, index: true, unique: true },
+    createTime: { type: Date, default: Date.now },
+    score: { type: Number, default: 0 },
+    level: { type: Number, default: 0 },
     followers: [ObjectId],
     following: [ObjectId],
     details: {
-        birth: {type: Date, default: Date.now},
-        sex: {type: String, enum: ['男', '女']},
+        name: String,
+        city: String,
+        homePage: string,
+        company: String,
+        motto: String,
+        birth: { type: Date, default: Date.now },
+        sex: { type: String, enum: ['男', '女'] },
         description: String
     }
 });
-UserSchema.statics.register=function(user,cb){
-this.create(user,cb)
+UserSchema.statics.register = function ( user, cb ) {
+    this.create( user, cb )
+}
+UserSchema.statics.userDetails = function () {
+
 }
 
-exports = module.exports = mongoose.model('UserModel', UserSchema);
+exports = module.exports = mongoose.model( 'UserModel', UserSchema );
