@@ -39,33 +39,43 @@ body {
 }
 
 .slide.ng-leave {
-    opacity: 1;
+    display: none;
 }
-.slide.ng-leave-active {
+/*.slide.ng-leave-active {
     opacity: 0;
-}
+}*/
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
+}
+/*文件上传*/
+.filePrew {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /*font-size: 100px; /* 增大不同浏览器的可点击区域 */
+    opacity: 0; /* 实现的关键点 */
+    filter: alpha(opacity=0); /* 兼容IE */
 }
 
 /*提示框样式*/
 @media (min-width: 768px) {
     .message {
-        position:fixed;
-        right:5px;
-        bottom:5px;
-        width:200px;
-
+        position: fixed;
+        right: 5px;
+        bottom: 5px;
+        width: 200px;
     }
 }
 
 @media (max-width: 768px) {
     .message {
-        position:fixed;
+        position: fixed;
         /*right:5px;*/
-        bottom:0px;
-        width:100%;
+        bottom: 0px;
+        width: 100%;
     }
 }
 
