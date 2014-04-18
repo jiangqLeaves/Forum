@@ -23,7 +23,7 @@ app.factory( 'Login', ['$http', function ( $http ) {
             $http.post( '/login', data )
                 .success( success )
                 .error( error )
-            }
+        }
     }
 }] );
 /**

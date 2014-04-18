@@ -26,10 +26,17 @@ var UserSchema = new Schema( {
     }
 });
 UserSchema.statics.register = function ( user, cb ) {
-    this.create( user, cb )
+    this.create( user, cb );
 }
-UserSchema.statics.userDetails = function () {
-
+UserSchema.statics.getUserInfo = function ( id, cb ) {
+    this.findOne( { _id: id })
+        .select( 'name creatTime score level details' )
+        .exec( cb );
+}
+UserSchema.statics.setUserInfo = function ( id, data, cb ) {
+    this.update( { _id: id }, { $set: { details: data.details } }, cb )
+}
+UserSchema.statics.addScore = function ( id, score, cb ) {
 }
 
 exports = module.exports = mongoose.model( 'UserModel', UserSchema );

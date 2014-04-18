@@ -62,7 +62,7 @@ var userCtrl = {
     getUserInfo: function (req, res, next) {
         var userID = req.params.userID;
 
-        UserModel.findById(userID, function (err, data) {
+        UserModel.getUserInfo(userID, function (err, data) {
             if (err) {
                 res.send(400)
             }
@@ -72,9 +72,9 @@ var userCtrl = {
         });
     },
     editUser: function (req, res, next) {
-        var userID = req.params.userID;
+        var userID = req.session._id
         var userEntity = req.body;
-        UserModel.update({_id: userID}, userEntity, function (err, numberAffected, raw) {
+        UserModel.setUserInfo(userID, userEntity, function (err, doc) {
             if (err) {
                 res.send(400);
             }
@@ -82,7 +82,6 @@ var userCtrl = {
                 res.send(200);
             }
         })
-
     },
     lockUser: function (req, res, next) {
     }
