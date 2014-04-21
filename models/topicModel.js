@@ -23,8 +23,8 @@ var topicSchema = new Schema( {
  * @param id 帖子id
  * @param cb 回调函数
  */
-topicSchema.statics.replyTopic = function ( id, cb ) {
-    this.update( { _id: id }, { $inc: { replyCount: 1 } })
+topicSchema.statics.replyTopic = function ( id, replyerId, cb ) {
+    this.update( { _id: id }, { $inc: { replyCount: 1 }, $set: { replyer: replyerId } })
         .exec( cb )
 }
 /**

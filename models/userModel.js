@@ -17,7 +17,7 @@ var UserSchema = new Schema( {
     details: {
         name: String,
         city: String,
-        homePage: string,
+        homePage: String,
         company: String,
         motto: String,
         birth: { type: Date, default: Date.now },
@@ -30,7 +30,7 @@ UserSchema.statics.register = function ( user, cb ) {
 }
 UserSchema.statics.getUserInfo = function ( id, cb ) {
     this.findOne( { _id: id })
-        .select( 'name creatTime score level details' )
+        .select( 'name createTime score level details' )
         .exec( cb );
 }
 UserSchema.statics.setUserInfo = function ( id, data, cb ) {

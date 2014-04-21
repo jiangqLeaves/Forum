@@ -35,22 +35,22 @@ app.config( ['$routeProvider', function ( $routeProvider ) {
             },
             templateUrl: 'topicEdit.html'
         })
-        .when( '/user', {//用户主页
-            controller: '',
-            resolve: {
+        //.when( '/user', {//用户主页
+        //    controller: '',
+        //    resolve: {
 
-            },
-            templateUrl: 'userIndex.html'
-        })
-    //.when('/user/:id', {//用户主页
-    //    controller: 'topicEditCtrl',
-    //    resolve: {
+        //    },
+        //    templateUrl: 'userIndex.html'
+        //})
+    .when('/User/:id', {//用户主页
+        controller: 'user',
+        resolve: {
 
-    //    },
-    //    templateUrl: 'user.html'
-    //})
-        .when( '/userInfo', {//个人资料
-            controller: 'topicEditCtrl',
+        },
+        templateUrl: 'userIndex.html'
+    })
+        .when( '/UserInfo/:id', {//个人资料
+            controller: 'user',
             resolve: {
 
             },

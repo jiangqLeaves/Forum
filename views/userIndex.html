@@ -1,11 +1,55 @@
-﻿<div class="topicList-body font" style="margin-bottom:20px;height:250px">
+﻿<div class="topicList-body font" style="margin-bottom:20px;">
     <div style="display: table;width:100%; background-color: #f5f5f5; padding: 0px; padding-left: 10px;">
         <div style="display: table-cell;width:80px;">
             <h5 class="font">我的主页</h5>
         </div>
         <div style="display:table-cell"></div>
-        <!--<div style="display: table-cell;width:60px; vertical-align:middle">
-            <a class="btn btn-info float-right" style="margin-right:5px;width:80px;" ng-click="replyTopic()">回复</a>
-        </div>-->
+        <div style="display: table-cell;width:60px; vertical-align:middle">
+            <a class="btn btn-info float-right" style="margin-right:5px;width:80px;" ng-click="replyTopic()"><span class="glyphicon glyphicon-plus"></span> 关注</a>
+        </div>
+    </div>
+    <div style="margin-top:15px;">
+
+        <div class="col-sm-2">
+            <img src="../public/images/images.jpg" alt="..." class="img-thumbnail img-responsive"
+                 style="display: inline">
+
+        </div>
+        <div class="col-sm-10 form-horizontal">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">ID：</label>
+                <label class="col-sm-8 control-label-right" ng-bind="user.name"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">姓名：</label>
+                <label class="col-sm-8 control-label-right" ng-bind="user.details.name"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">城市：</label>
+                <label class="col-sm-8 control-label-right" ng-bind="user.details.city"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">公司：</label>
+                <label class="col-sm-8 control-label-right" ng-bind="user.details.company"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">个人主页：</label>
+                <a class="col-sm-8 control-label-right" ng-href="user.details.homePage" ng-bind="user.details.homePage"></a>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">签名：</label>
+                <label class="col-sm-8 control-label-right" ng-bind="user.details.motto"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">简介：</label>
+                <label class="col-sm-8 control-label-right" ng-bind="user.details.description"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">创建时间：</label>
+                <label class="col-sm-8 control-label-right" ng-bind="user.createTime|date:'yyyy-MM-dd'"></label>
+            </div>
+        </div>
+        <div> &nbsp;</div>
     </div>
 </div>

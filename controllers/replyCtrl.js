@@ -30,7 +30,7 @@ var replyCtrl={
             })
         },
         function(cb){
-            TopicModel.replyTopic(topicId,function(err,doc){
+            TopicModel.replyTopic(topicId,reply.author,function(err,doc){
                 cb(null,[err,doc]);
             })
         }],

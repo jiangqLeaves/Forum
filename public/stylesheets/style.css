@@ -54,7 +54,6 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-
     /*font-size: 100px; /* 增大不同浏览器的可点击区域 */
     opacity: 0; /* 实现的关键点 */
     filter: alpha(opacity=0); /* 兼容IE */
@@ -79,7 +78,7 @@ body {
     }
 }
 
-.message
+
 /*导航栏样式*/
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
@@ -243,4 +242,17 @@ body {
 .child-reply-list {
     border-bottom: 1px solid #e3e3e3;
     padding: 10px 0px 10px 0px;
+}
+
+.form-horizontal .control-label-right {
+    padding-top: 7px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: initial;
+}
+
+@media (min-width: 768px) {
+    .form-horizontal .control-label-right {
+        text-align: left;
+    }
 }
