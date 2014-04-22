@@ -49,7 +49,7 @@ topicSchema.statics.getTopicList = function ( page, cb ) {
     this.find()
         .select( 'author theme replyTime clickCount replyCount replyer' )
         .sort( '-replyTime' )
-        .skip( 0 ).limit( 20 )
+        .skip( 20*(page-1) ).limit( 20*page )
         .populate( {
             path: 'author',
             select: 'name level'

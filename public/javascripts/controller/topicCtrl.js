@@ -6,7 +6,11 @@
 */
 app.controller( 'topicListCtrl', ['$scope', 'Topic', 'PubFunc', 'Sidebar', function ( $scope, Topic, PubFunc, Sidebar ) {
     $scope.dealDate = PubFunc.dateToPre;
-    $scope.topicList = Topic.query();
+
+    $scope.TotalItems = 0;
+    $scope.CurrentPage = 1;
+    $scope.maxSize = 5;
+
     $scope.isLogin = false;
     $scope.isAdmin = false;
     $scope.$on( 'UserStatus', function ( event, msg ) {
@@ -15,6 +19,15 @@ app.controller( 'topicListCtrl', ['$scope', 'Topic', 'PubFunc', 'Sidebar', funct
     });
     $scope.$emit( 'getUserStatus', '' );
     Sidebar.setSidebar( 'noReply' );
+
+    $scope.getData = function () {
+        Topic.query( { page: $scope.CurrentPage, typeId: '123123' },
+            function ( data ) {
+                $scope.topicList = data.doc;
+                $scope.TotalItems = data.count;
+            });
+    }
+    $scope.getData();
 }] )
 /**
 *主题详细控制器

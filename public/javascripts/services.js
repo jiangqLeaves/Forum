@@ -6,7 +6,9 @@
  * 服务：主题操作
  */
 app.factory( 'Topic', ['$resource', function ( $resource ) {
-    return $resource( '/Topic/:topicId' );
+    return $resource( '/Topic/:topicId', null,
+        { 'query': { method: 'GET' } }
+        );
 }] )
 /**
  * 服务：用户操作

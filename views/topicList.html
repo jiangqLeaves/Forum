@@ -26,7 +26,7 @@
         <tab heading="BootStrap"></tab>
         <tab heading="HTML5/CSS3"></tab>
     </tabset>
-    <div style="height:700px;">
+    <div>
         <div class="topicList-list " ng-repeat="topic in topicList" ng-mouseenter="selectedRow = $index"
              ng-mouseleave="selectedRow=null"
              ng-class="{'topicList-list-selected':$index==selectedRow}">
@@ -51,5 +51,8 @@
                 </p>
             </div>
         </div>
+    </div>
+    <div style="margin-left:20px; margin-top:5px;">
+        <pagination total-items="TotalItems" page="CurrentPage" max-size="maxSize" class="pagination" ng-click="getData()" boundary-links="true" rotate="false" items-per-page="20" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
     </div>
 </div>
