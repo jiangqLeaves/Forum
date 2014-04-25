@@ -14,16 +14,37 @@
             <p></p>
             <p>&nbsp;&nbsp;&nbsp;&nbsp; Markdown是一种轻量级标记语言，语法简洁明了、学习容易，而且功能比纯文本更强大，广泛的应用于博客等的书写。Stack Overflow， Reddit， GitHub 等都选择 Markdown 作为默认的写作格式。本论坛支持Markdown，您可以使用Markdown来对您的帖子编写。</p>
         </div>
-        <div class="input-group  col-sm-8">
-            <span class="input-group-addon">主题</span>
-            <input name="topicTheme" type="text" class="form-control" ng-model="topicDetail.theme">
+        <div class="row">
+            <div class=" col-sm-8">
+                <div class="input-group ">
+                    <span class="input-group-addon">主题</span>
+                    <input name="topicTheme" type="text" class="form-control" ng-model="topicDetail.theme">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group ">
+                    <span class="input-group-addon">标签</span>
+                    <input type="text" class="form-control" />
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown" style="height:34px">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-left " role="menu">
+                            <li><a>AngularJs</a></li>
+                            <li><a>HTML5/CSS3</a></li>
+                            <li class="divider"></li>
+                            <li><a>增加标签</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div style="margin-top: 10px; ">
             <div class="btn-group">
                 <button type="button" class="btn btn-default" ng-click="contents=''"><span class="glyphicon glyphicon-remove"></span> 清空</button>
                 <button type="button" class="btn btn-default" ng-model="radioModel"><span class="glyphicon glyphicon-saved"></span> 暂存</button>
-
             </div>
             <div class="btn-group" ng-init="editRadio='Right'">
                 <button type="button" class="btn btn-default" ng-model="editRadio" btn-radio="'Middle'"><span class="glyphicon glyphicon-list"></span> 同步</button>

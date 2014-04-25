@@ -31,7 +31,7 @@
                 <div style=" float:right">
                     <p style="font-size:11px;color: #838383 ;padding-left:15px;"><a> {{reply.author.name}}</a>  回复于  {{reply.replyTime|date:'yyyy-MM-dd HH:mm'}}</p>
                 </div>
-                <div style=" white-space: pre; word-wrap: break-word;margin-top:7px" ng-bind-html="reply.contentHtml"></div>
+                <div style=" white-space: pre-wrap; word-wrap: break-word; margin-top: 7px" ng-bind-html="reply.contentHtml"></div>
             </div>
         </div>
     </div>
