@@ -20,11 +20,12 @@
         </div>
     </div>
     <tabset class="hidden-xs">
-        <tab heading="全部"></tab>
-        <tab heading="Angular"></tab>
-        <tab heading="BackBone"></tab>
-        <tab heading="BootStrap"></tab>
-        <tab heading="HTML5/CSS3"></tab>
+        <tab heading="全部" select="tabChanged('')"></tab>
+        <tab heading="AngularJs" select="tabChanged('AngularJs')"></tab>
+        <tab heading="BackBone.js" select="tabChanged('BackBone.js')"></tab>
+        <tab heading="jQuery" select="tabChanged('jQuery')"></tab>
+        <tab heading="HTML5/CSS3" select="tabChanged('HTML5/CSS3')"></tab>
+        <tab heading="其他" select="tabChanged('other')"></tab>
     </tabset>
     <div>
         <div class="topicList-list " ng-repeat="topic in topicList" ng-mouseenter="selectedRow = $index"
@@ -53,6 +54,6 @@
         </div>
     </div>
     <div style="margin-left:20px; margin-top:5px;">
-        <pagination total-items="TotalItems" page="CurrentPage" max-size="maxSize" class="pagination" ng-click="getData()" boundary-links="true" rotate="false" items-per-page="20" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        <pagination total-items="TotalItems" page="CurrentPage" max-size="maxSize" class="pagination" ng-click="getData('')" boundary-links="true" rotate="false" items-per-page="20" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
     </div>
 </div>

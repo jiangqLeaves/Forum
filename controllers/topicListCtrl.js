@@ -1,37 +1,62 @@
 /**
  * Created by jiangqiang on 14-2-22.
  */
-var async = require( 'async' );
+var async = require('async');
 
-var topicModels = require( '../models' ).topicModel;
+var topicModels = require('../models').topicModel;
 
 var topicListCtrl = {
-    getTopicList: function ( req, res, next ) {
+        getTopicList: function (req, res, next) {
 
-        var page = req.query.page;
-        var type = req.query.typeId;
+            var page = req.query.page || 1;
+            var type = req.query.typeId || '';
+            var noReply = req.query.noReply || '';
+            var keyword = req.query.keyword || '';
 
-        async.parallel( [
-            function ( cb ) {
-                topicModels.getTopicList( page, function ( err, doc ) {
-                    cb( null, { err: err, doc: doc });
+            async.parallel([
+                function (cb) {
+                    topicModels.getTopicList(page, type, noReply, keyword, function (err, doc) {
+                        cb(null, { err: err, doc: doc });
+                    });
+                },
+                function (cb) {
+                    topicModels.count({type: type, isFinished: true}, function (err, count) {
+                        cb(null, { err: err, count: count });
+                    })
+                }],
+                function (err, results) {
+                    if (err || results[0].err || results[1].err) {
+                        res.send(400, { error: 'Êï∞ÊçÆÈîôËØØ' });
+                    }
+                    else {
+                        res.set('Cache-Control', 'no-cache');
+                        res.send({ "doc": results[0].doc, "count": results[1].count });
+                    }
                 });
-            },
-            function ( cb ) {
-                topicModels.count( function ( err, count ) {
-                    cb( null, { err: err, count: count });
-                })
-            }],
-            function ( err, results ) {
-                if ( err || results[0].err || results[1].err ) {
-                    res.send( 400, { error: '«Î«Û¥ÌŒÛ' });
+        },
+        getUserTopicList: function (req, res, next) {
+            var userID = req.params.userID;
+            topicModels.getPersonalTopicList(1, userID, function (err, doc) {
+                if (err) {
+                    res.send(400, { error: "ËØ∑Ê±ÇÈîôËØØ" })
                 }
                 else {
-                    res.set( 'Cache-Control', 'no-cache' );
-                    res.send({ "doc": results[0].doc, "count": results[0].count });
+                    res.send(doc);
                 }
-            });
+            })
+        },
+        getDraftTopicList: function (req, res, next) {
+            var userID = req.session._id
+            topicModels.getDraftTopicList(1, userID, function (err, doc) {
+                if (err) {
+                    res.send(400, { error: "ËØ∑Ê±ÇÈîôËØØ" })
+                }
+                else {
+                    res.send(doc);
+                }
+            })
+        }
     }
-};
+    ;
 
 exports.topicListCtrl = module.exports.topicListCtrl = topicListCtrl;

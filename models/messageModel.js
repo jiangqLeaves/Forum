@@ -9,6 +9,8 @@ var MessageSchema = new Schema({
     msgType: {type: String, enum: ['at', 'follow', 'reply', 'replyIn']},
     msgTo: {type: ObjectId, index: true},
     msgFrom: ObjectId,
+    msgTopic: ObjectId,
+    contents: String,
     isRead: {type: Boolean, default: false}
 });
 

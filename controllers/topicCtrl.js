@@ -14,7 +14,8 @@ var TopicCtrl = {
      */
     addTopic: function (req, res, next) {
         var topic = req.body;
-        topic.author=req.session._id;
+        topic.author = req.session._id;
+
         var topicEntity = new TopicModel(topic);
         topicEntity.save(function (err, doc) {
             if (err) {
@@ -22,7 +23,7 @@ var TopicCtrl = {
                 res.send(400, { error: '数据格式错误' });
             }
             else {
-                res.send({_id:doc._id});
+                res.send({_id: doc._id});
             }
         });
     },
@@ -45,12 +46,36 @@ var TopicCtrl = {
 
     },
 
-    delTopic: function (req, res, next) {
-
+    deleteTopic: function (req, res, next) {
+        var topicId = req.params.topicId;
+        TopicModel.findByIdAndRemove(topicId, function (err, data) {
+            if (err) {
+                res.send(400)
+            }
+            else {
+                res.send(200);
+            }
+        })
     },
 
     updateTopic: function (req, res, next) {
-
+        var topicId = req.params.topicId;
+        var topic = {
+            theme: req.body.theme,
+            contents: req.body.contents,
+            createTime: Date.now(),
+            editTime: req.body.editTime,
+            type: req.body.type,
+            isFinished: req.body.isFinished
+        }
+        TopicModel.findOneAndUpdate({_id: topicId}, topic, function (err, data) {
+            if (err) {
+                res.send(400)
+            }
+            else {
+                res.send(data);
+            }
+        });
     }
 };
 

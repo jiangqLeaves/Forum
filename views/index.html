@@ -37,9 +37,9 @@
                     <li>
                         <div class="input-group navbar-form " role="search" ng-init="searchFocus=false;">
                             <input type="text" class=" form-control search-input" placeholder="Search"
-                                   ng-focus="searchFocus=true" ng-blur="searchFocus=false" />
+                                   ng-focus="searchFocus=true" ng-blur="searchFocus=false" ng-model="keyword" />
                             <span class="input-group-addon  search-span" ng-class="{'search-span-focus':searchFocus}"
-                                  ng-click="myClick();">
+                                  ng-click="search()">
                                 <span class="glyphicon glyphicon-search"></span>
                             </span>
                         </div>
@@ -60,9 +60,8 @@
                         <ul class="dropdown-menu" style="width:100px;min-width:100px">
                             <li><a href="#User/{{User._id}}">我的主页</a></li>
                             <li><a href="#UserInfo/{{User._id}}">个人资料</a></li>
-                            <li><a href="#alert">我的收藏</a></li>
-                            <li><a href="#alert">草稿箱</a></li>
-                            <li style="border-top: 1px solid #e3e3e3;"><a href="#alert">退出</a></li>
+                            <li><a href="#UserDraft">草稿箱</a></li>
+                            <li style="border-top: 1px solid #e3e3e3;"><a ng-click="logout()">退出</a></li>
                         </ul>
                     </li>
                 </ul>

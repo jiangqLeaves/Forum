@@ -1,131 +1,151 @@
 /**
  * Created by jiangqiang on 14-3-8.
  */
-app.controller( 'navCtrl', ['$scope', '$modal', 'Message', function ( $scope, $modal, Message ) {
+app.controller('navCtrl', ['$scope', '$modal', '$location' , 'Message', 'Login', function ($scope, $modal, $location, Message, Login) {
     $scope.isLogin = false;
     $scope.isAdmin = false;
-    $scope.myClick = function () {
-        alert( "you have clicked me" );
-    }
+    $scope.keyword = '';
+
 
     $scope.login = function () {
-        var modalInstance = $modal.open( {
+        var modalInstance = $modal.open({
             templateUrl: './login.html',
-            controller: 'loginCtrl',
+            controller: 'loginCtrl'
         });
-        modalInstance.result.then( function ( resultData ) {
+        modalInstance.result.then(function (resultData) {
             var msg = {
                 isLogin: resultData.isLogin,
                 isAdmin: false
+                //user: resultData.user
             };
-            $scope.$emit( "setUserStatus", msg );
+            $scope.$emit("setUserStatus", msg);
             $scope.User = resultData.user;
         });
     };
     $scope.register = function () {
-        var modalInstance = $modal.open( {
+        var modalInstance = $modal.open({
             backdrop: true,
             templateUrl: './register.html',
             controller: 'registerCtrl',
             windowClass: 'register '
 
         });
-        modalInstance.result.then( function ( resultData ) {
+        modalInstance.result.then(function (resultData) {
             var msg = {
                 isLogin: resultData.isLogin,
-                isAdmin: false
+                isAdmin: false,
+                user: resultData.user
             };
-            $scope.$emit( 'setUserStatus', msg );
+            $scope.$emit('setUserStatus', msg);
             $scope.User = resultData.user;
         });
     }
-    $scope.$on( 'UserStatus', function ( event, msg ) {
+    $scope.logout = function () {
+        Login.logout('',
+            function (data) {
+                var msg = {
+                    isLogin: false,
+                    isAdmin: false,
+                    user: null
+                };
+                $scope.$emit("setUserStatus", msg);
+                $location.path('/#')
+            }
+        )
+    };
+    $scope.$on('UserStatus', function (event, msg) {
         $scope.isLogin = msg.isLogin;
         $scope.isAdmin = msg.isAdmin;
+        $scope.User = msg.user;
     })
-}] );
+
+    $scope.search = function () {
+        $scope.$emit('searchClick', $scope.keyword);
+    }
+}
+])
+;
 /**
-*µÇÂ½¿ØÖÆÆ÷
-*/
-app.controller( 'loginCtrl', ['$scope', '$modalInstance', 'Login', function ( $scope, $modalInstance, Login ) {
+ *ç™»å½•æŽ§åˆ¶å™¨
+ */
+app.controller('loginCtrl', ['$scope', '$modalInstance', 'Login', function ($scope, $modalInstance, Login) {
     $scope.status = false;
     $scope.login = {};
     $scope.ok = function () {
-        Login.login( $scope.login,
-            function ( data ) {
+        Login.login($scope.login,
+            function (data) {
                 var result = {};
                 result.isLogin = true;
                 result.user = data;
-                $modalInstance.close( result );
+                $modalInstance.close(result);
             },
-            function ( data ) {
-                $scope.alerts.push( { msg: data.error });
+            function (data) {
+                $scope.alerts.push({ msg: data.error });
             })
     };
 
     $scope.cancel = function () {
-        $modalInstance.dismiss( 'cancel' );
+        $modalInstance.dismiss('cancel');
     };
     $scope.alerts = [
     ];
-    $scope.closeAlert = function ( index ) {
-        $scope.alerts.splice( index, 1 );
+    $scope.closeAlert = function (index) {
+        $scope.alerts.splice(index, 1);
     };
-}] );
+}]);
 /**
-*×¢²á¿ØÖÆÆ÷
-*/
-app.controller( 'registerCtrl', ['$scope', '$modalInstance', 'User', function ( $scope, $modalInstance, User ) {
+ *æ³¨å†ŒæŽ§åˆ¶å™¨
+ */
+app.controller('registerCtrl', ['$scope', '$modalInstance', 'User', function ($scope, $modalInstance, User) {
 
     $scope.user = new User();
 
     $scope.status = false;
     $scope.isRedAgreement = true;
     $scope.errMsg = {
-        loginName: 'ÄúÊäÈëµÄÓÃ»§Ãû¸ñÊ½²»ÕýÈ·£¬ÇëÊäÈë3-18Î»Ö®¼äµÄÓ¢ÎÄ×Ö·û',
-        email: 'ÄúÊäÈëµÄÓÊÏä¸ñÊ½²»ÕýÈ·',
-        password: 'ÄúÊäÈëµÄÃÜÂë¸ñÊ½²»ÕýÈ·£¬ÇëÊäÈë6-18Î»Ö®¼äµÄÓ¢ÎÄ×Ö·û',
-        passwordChecked: 'ÄúÁ½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ'
+        loginName: 'è¯·è¾“å…¥3-18ä¹‹é—´çš„è‹±æ–‡å­—ç¬¦',
+        email: 'è¯·è¾“å…¥åˆæ³•çš„é‚®ç®±',
+        password: 'è¯·è¾“å…¥6-10ä½ä¹‹é—´çš„è‹±æ–‡å­—ç¬¦ã€æ•°å­—',
+        passwordChecked: 'ä¸¤æ¬¡å¯†ç è¾“å…¥ä¸ä¸€è‡´'
     }
     $scope.cancel = function () {
-        $modalInstance.dismiss( 'cancel' );
+        $modalInstance.dismiss('cancel');
     };
-    //ÃÜÂëÇ¿¶ÈÐ£Ñé
     var progressbarMsg = {
         value: [0, 25, 50, 75, 100],
         type: ['', 'danger', 'warning', 'info', 'success'],
-        msg: ['', '²»°²È«', 'Ò»°ã', '°²È«', '·Ç³£°²È«']
+        msg: ['', 'å±é™©', 'ä¸€èˆ¬', 'å®‰å…¨', 'éžå¸¸å®‰å…¨']
     }
     $scope.$watch(
         function () {
             return $scope.user.password
         },
-        function ( newValue, oldValue, scope ) {
-            if ( newValue === oldValue ) return;
+        function (newValue, oldValue, scope) {
+            if (newValue === oldValue) return;
             var passwordLv = 0;
-            if ( $scope.user.password.match( /[a-z]/ig ) ) {
+            if ($scope.user.password.match(/[a-z]/ig)) {
                 passwordLv++;
             }
-            if ( $scope.user.password.match( /[0-9]/ig ) ) {
+            if ($scope.user.password.match(/[0-9]/ig)) {
                 passwordLv++;
             }
-            if ( $scope.user.password.match( /(.[^a-z0-9])/ig ) ) {
+            if ($scope.user.password.match(/(.[^a-z0-9])/ig)) {
                 passwordLv++;
             }
-            if ( $scope.user.password.length > 12 ) {
+            if ($scope.user.password.length > 12) {
                 passwordLv++;
             }
             $scope.pgbVlaue = progressbarMsg.value[passwordLv],
-            $scope.pgbType = progressbarMsg.type[passwordLv],
-            $scope.pgbMsg = progressbarMsg.msg[passwordLv]
-    }, true );
+                $scope.pgbType = progressbarMsg.type[passwordLv],
+                $scope.pgbMsg = progressbarMsg.msg[passwordLv]
+        }, true);
     $scope.userRegister = function () {
-        $scope.user.$save( function ( data ) {
+        $scope.user.$save(function (data) {
             var result = {};
             result.isLogin = true;
             result.user = data;
-            $modalInstance.close( result );
+            $modalInstance.close(result);
         })
     };
 
-}] );
+}]);
