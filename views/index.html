@@ -61,6 +61,8 @@
                             <li><a href="#User/{{User._id}}">我的主页</a></li>
                             <li><a href="#UserInfo/{{User._id}}">个人资料</a></li>
                             <li><a href="#UserDraft">草稿箱</a></li>
+                            <li ng-hide="!isAdmin"><a href="#TopicManagement">帖子管理</a></li>
+                            <!--<li ng-hide="!isAdmin"><a href="#Manager">会员管理</a></li>-->
                             <li style="border-top: 1px solid #e3e3e3;"><a ng-click="logout()">退出</a></li>
                         </ul>
                     </li>

@@ -5,7 +5,7 @@
                 <span class="glyphicon glyphicon-fire" style="color: red"></span> {{topicDetail.theme}}
             </h3>
 
-            <p style="font-size:12px;color: #838383"><a>{{topicDetail.author.name}}</a>  发表于  {{topicDetail.createTime|date:'yyyy-MM-dd HH:mm'}}</p>
+            <p style="font-size:12px;color: #838383"><a href="#/User/{{topicDetail.author._id}}">{{topicDetail.author.name}}</a>  发表于  {{topicDetail.createTime|date:'yyyy-MM-dd HH:mm'}}</p>
         </div>
         <div style="display: table-cell;width:40px;font-size: 30px;color:  #428bca " ng-show="isLogin">
             <span class="glyphicon glyphicon-bookmark"></span>
@@ -16,10 +16,10 @@
 <div class="topicList-body font" style="margin-top:20px;">
     <div style="display:table;width:100%; background-color: #f5f5f5; padding: 1px; padding-left: 10px;">
         <div style="display:table-cell">
-            <h4>共{{}}条回复</h4>
+            <h4>回复</h4>
         </div>
         <div style="display: table-cell;width:50px;font-size: 30px;color:  #428bca ">
-            <span class="glyphicon glyphicon-bookmark"></span>
+
         </div>
     </div>
     <div class="edit-body " style="padding: 15px; overflow:initial;height:100%">
@@ -34,6 +34,7 @@
                 <div style=" white-space: pre-wrap; word-wrap: break-word; margin-top: 7px" ng-bind-html="reply.contentHtml"></div>
             </div>
         </div>
+        <div ng-hide="replyList.length!=0" >暂无回复</div>
     </div>
 </div>
 

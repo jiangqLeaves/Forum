@@ -9,73 +9,48 @@ app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
         when('/', {
             controller: 'topicListCtrl',
-            resolve: {
-
-            },
             templateUrl: 'topicList.html'
         })
         .when('/Topic/:id', {//主题详细
             controller: 'topicDetailCtrl',
-            resolve: {
-
-            },
             templateUrl: 'topicDetail.html'
         })
         .when('/Add', {//新增主题
             controller: 'topicEditCtrl',
-            resolve: {
-
-            },
             templateUrl: 'topicEdit.html'
         })
         .when('/Edit/:id', {//修改主题
             controller: 'topicEditCtrl',
-            resolve: {
-
-            },
             templateUrl: 'topicEdit.html'
         })
-        //.when( '/user', {//用户主页
-        //    controller: '',
-        //    resolve: {
-
-        //    },
-        //    templateUrl: 'userIndex.html'
-        //})
         .when('/User/:id', {//用户主页
             controller: 'user',
-            resolve: {
-
-            },
             templateUrl: 'userIndex.html'
         })
         .when('/UserInfo/:id', {//个人资料
             controller: 'user',
-            resolve: {
-
-            },
             templateUrl: 'userInfo.html'
         })
         .when('/UserDraft', {//草稿箱
             controller: 'userDraft',
             templateUrl: 'userDraft.html'
-
         })
-
+        .when('/TopicManagement', {//管理
+            controller: 'topicManagement',
+            templateUrl: 'TopicManagement.html'
+        })
         .otherwise({ redirectTo: '/' });
 }]);
 /**
  *根控制器
  */
-app.controller('rootCtrl', ['$scope', '$timeout', 'Login', function ($scope, $timeout, Login) {
+app.controller('rootCtrl', ['$scope', '$timeout', '$location', 'Login', function ($scope, $timeout, $location, Login) {
 
     var UserStatus = {
-        isLogin: false,
-        isAdmin: false
+        isLogin: false
     }
     $scope.$on('setUserStatus', function (event, msg) {
         UserStatus.isLogin = msg.isLogin;
-        UserStatus.isAdmin = msg.isAdmin;
         UserStatus.user = msg.data;
         $scope.$broadcast("UserStatus", UserStatus);
     });
@@ -92,9 +67,10 @@ app.controller('rootCtrl', ['$scope', '$timeout', 'Login', function ($scope, $ti
             UserStatus.user = data;
             $scope.$broadcast("UserStatus", UserStatus);
         }, function () {
+            $location.path('/T#');
         })
     }
-    $timeout(getStatus,1000*60*5)
+    $timeout(getStatus, 1000 * 60 * 5)
     getStatus();
 }])
 

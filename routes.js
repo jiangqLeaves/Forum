@@ -5,6 +5,7 @@ var UserCtrl = require('./controllers').userCtrl;
 var TopicCtrl = require('./controllers').topicCtrl;
 var TopicListCtrl = require('./controllers').topicListCtrl;
 var ReplyCtrl = require('./controllers').replyCtrl;
+var RelationCtrl=require('./controllers').relationCtrl;
 
 var routes = function (app) {
 
@@ -18,11 +19,12 @@ var routes = function (app) {
     app.post('/Topic/:topicId', TopicCtrl.updateTopic);
     app.delete('/Topic/:topicId', TopicCtrl.deleteTopic);
 
-    app.get('/UserTopic:userID', TopicListCtrl.getUserTopicList)
+    app.get('/UserTopic/:userID', TopicListCtrl.getUserTopicList)
     app.get('/UserTopic', TopicListCtrl.getDraftTopicList)
 
     app.post('/user', UserCtrl.register);
-    app.get('/user/:userID', UserCtrl.getUserInfo)
+    app.get('/User',UserCtrl.getUserList);
+    app.get('/user/:userID', UserCtrl.getUserInfo);
     app.post('/user/:userID', UserCtrl.editUser);
 
     app.get('/reply', ReplyCtrl.getReplyList);
@@ -31,6 +33,8 @@ var routes = function (app) {
     app.post('/login', UserCtrl.login);
     app.post('/logout', UserCtrl.logout);
     app.post('/status', UserCtrl.loginStatus);
+
+    app.post('/Relation/:userID',RelationCtrl.follow)
 
 }
 

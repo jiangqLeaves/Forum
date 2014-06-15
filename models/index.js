@@ -18,7 +18,7 @@ var models = {
     messageModel: require('./messageModel'),
     topicModel: require('./topicModel'),
     userModel: require('./userModel'),
-    statusModel: require('./statusModel'),
+    relationModel: require('./relationModel'),
     replyModel: require('./replyModel')
 }
 

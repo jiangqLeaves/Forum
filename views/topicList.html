@@ -32,7 +32,8 @@
              ng-mouseleave="selectedRow=null"
              ng-class="{'topicList-list-selected':$index==selectedRow}">
             <div class="topicList-list-avatar" style="width: 45px;">
-                <img src="../public/images/images.jpg" alt="..." class="img-thumbnail img-responsive"
+                <img ng-src="{{topic.author.icon||'../public/images/images.jpg'}}" alt="{{topic.author.name}}"
+                     class="img-thumbnail img-responsive"
                      style="display: inline">
             </div>
             <div class=" hidden-xs topicList-list-item" style="width: 80px;">
@@ -41,7 +42,11 @@
                 </p>
             </div>
             <div class="topicList-list-item topicList-list-theme">
-                <a href="#/Topic/{{topic._id}}">{{topic.theme}}</a>
+                <a href="#/Topic/{{topic._id}}">
+                    <span ng-hide="!isHot(topic.replyTime,topic.replyCount)" class="glyphicon glyphicon-fire" style="color: red"></span>
+                    <span ng-hide="!topic.isTop" class="topicList-flag topicList-top">&nbsp;置顶&nbsp;</span>
+                    <span ng-hide="!topic.isEssence" class="topicList-flag topicList-essence">精&nbsp;</span>
+                    &nbsp;{{topic.theme}}</a>
             </div>
             <div class="topicList-list-item " style="width: 80px;">
                 <a href="#/User/{{topic.replyer._id}}" style="font-size: 14px;float:right">{{topic.replyer.name}}</a>
@@ -54,6 +59,8 @@
         </div>
     </div>
     <div style="margin-left:20px; margin-top:5px;">
-        <pagination total-items="TotalItems" page="CurrentPage" max-size="maxSize" class="pagination" ng-click="getData('')" boundary-links="true" rotate="false" items-per-page="20" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        <pagination total-items="TotalItems" page="CurrentPage" max-size="maxSize" class="pagination"
+                    ng-click="getData('')" boundary-links="true" rotate="false" items-per-page="20"
+                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
     </div>
 </div>

@@ -13,12 +13,22 @@ app.controller('topicListCtrl', ['$scope', 'Topic', 'PubFunc', 'Sidebar', functi
 
     $scope.isLogin = false;
     $scope.isAdmin = false;
+    $scope.isHot = function (date,replyCount) {
+        var nowTime = Date.now();
+        var preTime = ( new Date(date) ).getTime();
+        var timeGap = parseFloat(nowTime - preTime) / (1000*60*60);
+        var rate=parseFloat(replyCount)/timeGap;
+        window.console.log(timeGap,rate)
+        return rate>30?true:false;
+    }
     $scope.$on('UserStatus', function (event, msg) {
         $scope.isLogin = msg.isLogin;
         $scope.isAdmin = msg.isAdmin;
     });
     $scope.$emit('getUserStatus', '');
+    Sidebar.clear()
     Sidebar.setSidebar('noReply');
+    Sidebar.setSidebar('stars');
 
     $scope.getData = function () {
         Topic.query({ page: $scope.CurrentPage, typeId: $scope.topicType },
@@ -43,7 +53,8 @@ app.controller('topicListCtrl', ['$scope', 'Topic', 'PubFunc', 'Sidebar', functi
 /**
  *主题详细控制器
  */
-app.controller('topicDetailCtrl', ['$scope', '$sanitize', '$routeParams', 'Topic', 'Reply', function ($scope, $sanitize, $routeParams, Topic, Reply) {
+app.controller('topicDetailCtrl', ['$scope', '$sanitize', '$routeParams', 'Topic', 'Reply',
+    function ($scope, $sanitize, $routeParams, Topic, Reply) {
     var replyListData = [];
     Topic.get({ topicId: $routeParams.id }, function (_topic) {
         $scope.topicDetail = _topic;
@@ -124,7 +135,7 @@ app.controller('topicEditCtrl', ['$scope', '$sanitize', '$routeParams', '$locati
             $scope.topicDetail.isFinished = isFinished;
             if (isNew) {
                 $scope.topicDetail.creatTime = new Date();
-                $scope.topicDetail.$save( function (data) {
+                $scope.topicDetail.$save(function (data) {
                     if (isFinished) {
                         Message.success('发布成功');
                         $location.path('/Topic/' + data._id);
@@ -158,5 +169,11 @@ app.controller('sidebarTopicListCtrl', ['$scope', 'Topic', function ($scope, Top
     Topic.query({ page: 1, noReply: true, typeId: '' },
         function (data) {
             $scope.topicList = data.doc;
+        });
+}])
+app.controller('sidebarUserListCtrl', ['$scope', 'User', function ($scope, User) {
+    User.query(
+        function (data) {
+            $scope.users = data;
         });
 }])

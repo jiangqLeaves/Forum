@@ -1,0 +1,18 @@
+<div ng-controller="sidebarUserListCtrl" class="topicList-body font" style="margin-bottom:20px;">
+    <div style="display: table;width:100%; background-color: #f5f5f5; padding: 0px; padding-left: 10px;">
+        <div style="display: table-cell;width:80px;">
+            <h5 class="font">社区达人</h5>
+        </div>
+        <div style="display:table-cell"></div>
+        <!--<div style="display: table-cell;width:60px; vertical-align:middle">
+            <a class="btn btn-info float-right" style="margin-right:5px;width:80px;" ng-click="replyTopic()">回复</a>
+        </div>-->
+    </div>
+
+    <div class="topicList-list " ng-repeat="user in users | limitTo : 6" ng-mouseenter="selectedRow = $index"
+         ng-mouseleave="selectedRow=null" style="height: 35px;"
+         ng-class="{'topicList-list-selected':$index==selectedRow}">
+        <a href="#/User/{{user._id}}" style="color:#666;padding-left: 2px; ">{{user.name}}</a>
+        <span style="width: 50px; font-size: 12px; color: #666;float:right ">{{user.score}}分</span>
+    </div>
+</div>

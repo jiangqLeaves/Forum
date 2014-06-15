@@ -9,7 +9,7 @@
         </div>-->
     </div>
 
-    <div class="topicList-list " ng-repeat="topic in topicList | limitTo : 10" ng-mouseenter="selectedRow = $index"
+    <div class="topicList-list " ng-repeat="topic in topicList | limitTo : 6" ng-mouseenter="selectedRow = $index"
          ng-mouseleave="selectedRow=null" style="height: 35px;"
          ng-class="{'topicList-list-selected':$index==selectedRow}">
         <a href="#/Topic/{{topic._id}}" style="color:#666;padding-left: 2px; ">{{topic.theme}}</a>

@@ -5,14 +5,14 @@
         </div>
         <div style="display:table-cell"></div>
         <div style="display: table-cell;width:60px; vertical-align:middle">
-            <a class="btn btn-info float-right" style="margin-right:5px;width:80px;" ng-click="replyTopic()"><span
+            <a ng-hide="isVisitor" class="btn btn-info float-right" style="margin-right:5px;width:80px;" ng-click="follow()"><span
                     class="glyphicon glyphicon-plus"></span> 关注</a>
         </div>
     </div>
     <div style="margin-top:15px;">
 
         <div class="col-sm-2">
-            <img src="../public/images/images.jpg" alt="..." class="img-thumbnail img-responsive"
+            <img ng-src="{{user.icon||'../public/images/images.jpg'}}" alt="..." class="img-thumbnail img-responsive"
                  style="display: inline">
 
         </div>

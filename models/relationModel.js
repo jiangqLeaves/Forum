@@ -5,10 +5,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
-var statusSchema = new Schema({
+var relationSchema = new Schema({
     userID: {type: ObjectId, index: true},
-    reason: String,
-    unlockedTime: Date
+    followID: {type: ObjectId},
+    date: {type: Date, default: Date.now}
 });
 
-exports = module.exports = mongoose.model('statusModel', statusSchema);
+exports = module.exports = mongoose.model('relationModel', relationSchema);

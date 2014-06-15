@@ -17,7 +17,9 @@ var topicSchema = new Schema({
     replyCount: { type: Number, default: '0' },
     replyTime: { type: Date, default: Date.now },
     replyer: { type: ObjectId, ref: 'UserModel' },
-    isFinished: {type: Boolean, default: false}
+    isFinished: {type: Boolean, default: false},
+    isEssence: {type: Boolean, default: false},
+    isTop: {type: Boolean, default: false}
 });
 /**
  * 回复帖子
@@ -25,7 +27,7 @@ var topicSchema = new Schema({
  * @param cb 回调函数
  */
 topicSchema.statics.replyTopic = function (id, replyerId, cb) {
-    this.update({ _id: id }, { $inc: { replyCount: 1 }, $set: { replyer: replyerId } })
+    this.findByIdAndUpdate(id, { $inc: { replyCount: 1 }, $set: { replyer: replyerId, replyTime: Date.now() } })
         .exec(cb)
 }
 /**
@@ -62,16 +64,16 @@ topicSchema.statics.getTopicList = function (page, topicType, noReply, keyword, 
     }
     this
         .find(condition)
-        .select('author theme replyTime clickCount replyCount replyer')
-        .sort('-replyTime')
+        .select('author theme replyTime clickCount replyCount replyer isTop isEssence')
+        .sort({ isTop: 'desc', replyTime: 'desc' })
         .skip(20 * (page - 1)).limit(20)
         .populate({
             path: 'author',
-            select: 'name level'
+            select: 'name level icon'
         })
         .populate({
             path: 'replyer',
-            select: 'name level'
+            select: 'name level icon'
         })
         .exec(cb)
 }
@@ -85,16 +87,16 @@ topicSchema.statics.getPersonalTopicList = function (page, id, cb) {
     this
         .find()
         .where({author: id, isFinished: true})
-        .select('author theme replyTime clickCount replyCount replyer')
-        .sort('-replyTime')
+        .select('author theme replyTime clickCount replyCount replyer isTop isEssence ')
+        .sort({ isTop: 'desc', replyTime: 'desc' })
         .skip(20 * (page - 1)).limit(20)
         .populate({
             path: 'author',
-            select: 'name level'
+            select: 'name level icon'
         })
         .populate({
             path: 'replyer',
-            select: 'name level'
+            select: 'name level icon'
         })
         .exec(cb);
 }

@@ -15,11 +15,11 @@ app.controller('navCtrl', ['$scope', '$modal', '$location' , 'Message', 'Login',
         modalInstance.result.then(function (resultData) {
             var msg = {
                 isLogin: resultData.isLogin,
-                isAdmin: false
-                //user: resultData.user
+                user: resultData.user
             };
-            $scope.$emit("setUserStatus", msg);
+            $scope.$emit('setUserStatus', msg);
             $scope.User = resultData.user;
+            $scope.isAdmin = resultData.user.isAdmin||false;
         });
     };
     $scope.register = function () {
@@ -33,11 +33,11 @@ app.controller('navCtrl', ['$scope', '$modal', '$location' , 'Message', 'Login',
         modalInstance.result.then(function (resultData) {
             var msg = {
                 isLogin: resultData.isLogin,
-                isAdmin: false,
                 user: resultData.user
             };
             $scope.$emit('setUserStatus', msg);
             $scope.User = resultData.user;
+            $scope.isAdmin = resultData.user.isAdmin||false;
         });
     }
     $scope.logout = function () {
@@ -45,7 +45,6 @@ app.controller('navCtrl', ['$scope', '$modal', '$location' , 'Message', 'Login',
             function (data) {
                 var msg = {
                     isLogin: false,
-                    isAdmin: false,
                     user: null
                 };
                 $scope.$emit("setUserStatus", msg);
@@ -55,7 +54,7 @@ app.controller('navCtrl', ['$scope', '$modal', '$location' , 'Message', 'Login',
     };
     $scope.$on('UserStatus', function (event, msg) {
         $scope.isLogin = msg.isLogin;
-        $scope.isAdmin = msg.isAdmin;
+        $scope.isAdmin = msg.user.isAdmin||false;
         $scope.User = msg.user;
     })
 

@@ -1,9 +1,11 @@
 /**
  * Created by jiangqiang on 14-2-19.
  */
-//var async = require('async');
+var async = require('async');
 
 var TopicModel = require('../models').topicModel;
+var MessageModel = require('../models').messageModel;
+var UserModel = require('../models').userModel;
 
 var TopicCtrl = {
     /**
@@ -15,7 +17,10 @@ var TopicCtrl = {
     addTopic: function (req, res, next) {
         var topic = req.body;
         topic.author = req.session._id;
-
+        if (req.body.isFinished) {
+            UserModel.addScore(topic.author, 10, function (err, doc) {
+            })
+        }
         var topicEntity = new TopicModel(topic);
         topicEntity.save(function (err, doc) {
             if (err) {
@@ -60,13 +65,31 @@ var TopicCtrl = {
 
     updateTopic: function (req, res, next) {
         var topicId = req.params.topicId;
-        var topic = {
-            theme: req.body.theme,
-            contents: req.body.contents,
-            createTime: Date.now(),
-            editTime: req.body.editTime,
-            type: req.body.type,
-            isFinished: req.body.isFinished
+        if (req.body.isEssence != undefined) {
+            var topic = {
+                isEssence: req.body.isEssence
+            }
+        }
+
+        else if (req.body.isTop != undefined) {
+            var topic = {
+                isTop: req.body.isTop
+            }
+        }
+        else {
+
+            var topic = {
+                theme: req.body.theme,
+                contents: req.body.contents,
+                createTime: req.body.createTime,
+                editTime: req.body.editTime,
+                type: req.body.type,
+                isFinished: req.body.isFinished
+            }
+//            if (topic.isFinished) {
+//                UserModel.addScore(req.session._id, 10, function (err, doc) {
+//                })
+//            }
         }
         TopicModel.findOneAndUpdate({_id: topicId}, topic, function (err, data) {
             if (err) {

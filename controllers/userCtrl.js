@@ -1,6 +1,8 @@
 /**
  * Created by jiangqiang on 14-2-19.
  */
+var async = require('async');
+
 var UserModel = require('../models').userModel;
 
 var userCtrl = {
@@ -25,7 +27,7 @@ var userCtrl = {
     },
     logout: function (req, res, next) {
         req.session._id = null;
-       res.send(200);
+        res.send(200);
     },
     login: function (req, res, next) {
         var userName = req.body.loginName;
@@ -48,7 +50,8 @@ var userCtrl = {
                             name: doc[0].name,
                             createTime: doc[0].createTime,
                             score: doc[0].score,
-                            level: doc[0].level
+                            level: doc[0].level,
+                            isAdmin: doc[0].isAdmin
                         }
                         req.session._id = _doc._id;
                         res.send(200, _doc);
@@ -70,7 +73,8 @@ var userCtrl = {
                         name: doc.name,
                         createTime: doc.createTime,
                         score: doc.score,
-                        level: doc.level
+                        level: doc.level,
+                        isAdmin: doc.isAdmin
                     }
                     req.session._id = _doc._id;
                     res.send(200, _doc);
@@ -79,9 +83,8 @@ var userCtrl = {
         else
             res.send(400);
     },
-    activateAccount: function (req, res, next) {
 
-    },
+
     getUserInfo: function (req, res, next) {
         var userID = req.params.userID;
 
@@ -117,7 +120,16 @@ var userCtrl = {
             }
         })
     },
-    lockUser: function (req, res, next) {
+    getUserList: function (req, res, next) {
+        UserModel.getUserList(function (err, doc) {
+            if (err) {
+                res.send(400, { error: "数据错误" });
+            }
+            else {
+                res.send(doc);
+            }
+        })
+
     }
 };
 

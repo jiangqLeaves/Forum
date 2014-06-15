@@ -41,6 +41,7 @@ body {
 .slide.ng-leave {
     display: none;
 }
+
 /*.slide.ng-leave-active {
     opacity: 0;
 }*/
@@ -48,6 +49,7 @@ body {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
+
 /*文件上传*/
 .filePrew {
     display: block;
@@ -63,9 +65,11 @@ body {
 @media (min-width: 768px) {
     .message {
         position: fixed;
-        right: 5px;
-        bottom: 5px;
-        width: 200px;
+        right: 0px;
+        top: 0px;
+        height: 50px;
+        width: 25%;
+        z-index:10000;
     }
 }
 
@@ -77,7 +81,6 @@ body {
         width: 100%;
     }
 }
-
 
 /*导航栏样式*/
 .nav, .pagination, .carousel, .panel-title a {
@@ -133,8 +136,6 @@ body {
     border-radius: 4px;
 }
 
-
-
 .topicList-list {
     border-bottom: 1px solid #e3e3e3;
     height: 50px;
@@ -142,14 +143,46 @@ body {
     width: 100%;
 }
 
+.topicList-flag {
 
+    display: inline-block;
+    padding: 0px 2px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.topicList-top {
+    color: #ffffff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+.topicList-essence {
+    color: #ffffff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
 
 .topicList-list-selected {
     background-color: #f5f5f5;
 }
 
-    .topicList-list-selected a {
-    }
+.topicList-list-selected a {
+}
 
 .topicList-list-reply {
     height: 40px;
@@ -168,15 +201,15 @@ body {
     overflow: hidden;
 }
 
-    .topicList-list-item a {
-        color: #666;
-    }
+.topicList-list-item a {
+    color: #666;
+}
 
-        .topicList-list-item a :hover {
-            cursor: pointer;
-            color: #428bca;
-            text-decoration: none;
-        }
+.topicList-list-item a :hover {
+    cursor: pointer;
+    color: #428bca;
+    text-decoration: none;
+}
 
 .topicList-list-avatar {
     position: relative;
@@ -190,7 +223,7 @@ body {
         width: -moz-calc(100% - 280px);
         width: -webkit-calc(100% - 280px);
         width: calc(100% - 280px);
-        ngWidth: 100% - 280px;
+        ngWidth: 100% -280px;
     }
 }
 
@@ -199,7 +232,7 @@ body {
         width: -moz-calc(100% - 155px);
         width: -webkit-calc(100% - 155px);
         width: calc(100% - 155px);
-        ngWidth: 100% - 155px;
+        ngWidth: 100% -155px;
     }
 }
 
@@ -209,11 +242,12 @@ body {
     color: black;
 }
 
-    .topicList-list-theme a:focus, a:hover {
-        cursor: pointer;
-        color: #428bca;
-        text-decoration: none;
-    }
+.topicList-list-theme a:focus, a:hover {
+    cursor: pointer;
+    color: #428bca;
+    text-decoration: none;
+}
+
 /*编辑帖子样式*/
 .edit-title {
     display: table;

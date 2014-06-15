@@ -14,7 +14,7 @@ app.factory('Topic', ['$resource', function ($resource) {
  * 服务：个人帖子主题操作
  */
 app.factory('UserTopic', ['$resource', function ($resource) {
-    return $resource('/UserTopic:userId');
+    return $resource('/UserTopic/:userId');
 }])
 /**
  * 服务：用户操作
@@ -49,4 +49,10 @@ app.factory('Login', ['$http', function ($http) {
  */
 app.factory('Reply', ['$resource', function ($resource) {
     return $resource('/Reply/:replyId');
+}]);
+/**
+ * 服务：关注
+ */
+app.factory('Relation', ['$resource', function ($resource) {
+    return $resource('/Relation/:userId');
 }]);
