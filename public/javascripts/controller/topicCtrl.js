@@ -13,13 +13,13 @@ app.controller('topicListCtrl', ['$scope', 'Topic', 'PubFunc', 'Sidebar', functi
 
     $scope.isLogin = false;
     $scope.isAdmin = false;
-    $scope.isHot = function (date,replyCount) {
+    $scope.isHot = function (date, replyCount) {
         var nowTime = Date.now();
         var preTime = ( new Date(date) ).getTime();
-        var timeGap = parseFloat(nowTime - preTime) / (1000*60*60);
-        var rate=parseFloat(replyCount)/timeGap;
-        window.console.log(timeGap,rate)
-        return rate>30?true:false;
+        var timeGap = parseFloat(nowTime - preTime) / (1000 * 60 * 60);
+        var rate = parseFloat(replyCount) / timeGap;
+        window.console.log(timeGap, rate)
+        return rate > 30 ? true : false;
     }
     $scope.$on('UserStatus', function (event, msg) {
         $scope.isLogin = msg.isLogin;
@@ -55,63 +55,71 @@ app.controller('topicListCtrl', ['$scope', 'Topic', 'PubFunc', 'Sidebar', functi
  */
 app.controller('topicDetailCtrl', ['$scope', '$sanitize', '$routeParams', 'Topic', 'Reply',
     function ($scope, $sanitize, $routeParams, Topic, Reply) {
-    var replyListData = [];
-    Topic.get({ topicId: $routeParams.id }, function (_topic) {
-        $scope.topicDetail = _topic;
-        $scope.contentHtml = markdown.toHTML(_topic.contents);
-    });
-    Reply.query({ topicId: $routeParams.id }, function (_reply) {
-        replyListData = _reply;
-        $scope.replyList = formatReply(_reply);
-    })
-    var reply = new Reply();
-    $scope.replyTopic = function () {
-        reply.replyTopic = $routeParams.id;
-        reply.contents = $scope.reply.contents;
-        reply.$save(function (_reply) {
-            replyListData.push(_reply)
-            $scope.replyList = formatReply(replyListData);
-            $scope.reply.contents = '';
+        var replyListData = [];
+        Topic.get({ topicId: $routeParams.id }, function (_topic) {
+            $scope.topicDetail = _topic;
+            $scope.contentHtml = markdown.toHTML(_topic.contents);
+        });
+        Reply.query({ topicId: $routeParams.id }, function (_reply) {
+            replyListData = _reply;
+            $scope.replyList = formatReply(_reply);
         })
-    };
-    $scope.isLogin = false;
-    $scope.isAdmin = false;
-    $scope.$on('UserStatus', function (event, msg) {
-        $scope.isLogin = msg.isLogin;
-        $scope.isAdmin = msg.isAdmin;
-    });
-    $scope.$emit('getUserStatus', '');
-    function formatReply(reply) {
-        var _reply = [];
-        for (var i = 0; i < reply.length; i++) {
-            reply[i].contentHtml = markdown.toHTML(reply[i].contents);
-            if (reply[i].replyTo == undefined) {
-                _reply.push(reply[i])
-            }
-            else {
-                var index = getReplyIndex(_reply, reply[i], 0, _reply.length);
-                if (index != null) {
-                    if (_reply[index].childReply == undefined)
-                        _reply[index].childReply = [];
-                    _reply[index].childReply.push(reply[i])
+        var reply = new Reply();
+        $scope.replyTopic = function () {
+            reply.replyTopic = $routeParams.id;
+            reply.contents = $scope.reply.contents;
+            reply.$save(function (_reply) {
+                replyListData.push(_reply)
+                $scope.replyList = formatReply(replyListData);
+                $scope.reply.contents = '';
+            })
+        };
+        $scope.isLogin = false;
+        $scope.isAdmin = false;
+        $scope.$on('UserStatus', function (event, msg) {
+            $scope.isLogin = msg.isLogin;
+            $scope.isAdmin = msg.isAdmin;
+        });
+        $scope.$emit('getUserStatus', '');
+        function formatReply(reply) {
+            var _reply = [];
+            for (var i = 0; i < reply.length; i++) {
+                reply[i].contentHtml = markdown.toHTML(reply[i].contents);
+                if (reply[i].replyTo == undefined) {
+                    _reply.push(reply[i])
+                }
+                else {
+                    var index = getReplyIndex(_reply, reply[i], 0, _reply.length);
+                    if (index != null) {
+                        if (_reply[index].childReply == undefined)
+                            _reply[index].childReply = [];
+                        _reply[index].childReply.push(reply[i])
+                    }
                 }
             }
+            return _reply;
         }
-        return _reply;
-    }
 
-    function getReplyIndex(replyList, reply, start, end) {
-        var middle = parseInt(( end + start ) / 2);
-        if (replyList[middle] == reply.replyTo)
-            return middle;
-        else if (replyList[middle] < reply.replyTo)
-            return getReplyIndex(replyList, reply, middle, end)
-        else if (replyList[middle] > reply.replyTo)
-            return getReplyIndex(replyList, reply, start, middle)
-        else
-            return null;
-    }
-}]);
+        $scope.isHot = function (date, replyCount) {
+            var nowTime = Date.now();
+            var preTime = ( new Date(date) ).getTime();
+            var timeGap = parseFloat(nowTime - preTime) / (1000 * 60 * 60);
+            var rate = parseFloat(replyCount) / timeGap;
+            window.console.log(timeGap, rate)
+            return rate > 30 ? true : false;
+        }
+        function getReplyIndex(replyList, reply, start, end) {
+            var middle = parseInt(( end + start ) / 2);
+            if (replyList[middle] == reply.replyTo)
+                return middle;
+            else if (replyList[middle] < reply.replyTo)
+                return getReplyIndex(replyList, reply, middle, end)
+            else if (replyList[middle] > reply.replyTo)
+                return getReplyIndex(replyList, reply, start, middle)
+            else
+                return null;
+        }
+    }]);
 /**
  *主题编辑控制器
  */

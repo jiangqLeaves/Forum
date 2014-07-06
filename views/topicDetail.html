@@ -2,10 +2,15 @@
     <div style="display:table;width:100%; background-color: #f5f5f5; padding: 1px; padding-left: 10px;">
         <div style="display:table-cell">
             <h3 class="font">
-                <span class="glyphicon glyphicon-fire" style="color: red"></span> {{topicDetail.theme}}
+                <span ng-hide="!isHot(topicDetail.replyTime,topicDetail.replyCount)" class="glyphicon glyphicon-fire"
+                      style="color: red"></span>
+                <span ng-hide="!topicDetail.isTop" class="topicList-flag topicList-top">&nbsp;置顶&nbsp;</span>
+                <span ng-hide="!topicDetail.isEssence" class="topicList-flag topicList-essence">精&nbsp;</span>
+                </span> {{topicDetail.theme}}
             </h3>
 
-            <p style="font-size:12px;color: #838383"><a href="#/User/{{topicDetail.author._id}}">{{topicDetail.author.name}}</a>  发表于  {{topicDetail.createTime|date:'yyyy-MM-dd HH:mm'}}</p>
+            <p style="font-size:12px;color: #838383"><a href="#/User/{{topicDetail.author._id}}">{{topicDetail.author.name}}</a>
+                发表于 {{topicDetail.createTime|date:'yyyy-MM-dd HH:mm'}}</p>
         </div>
         <div style="display: table-cell;width:40px;font-size: 30px;color:  #428bca " ng-show="isLogin">
             <span class="glyphicon glyphicon-bookmark"></span>
@@ -25,16 +30,19 @@
     <div class="edit-body " style="padding: 15px; overflow:initial;height:100%">
         <div class="reply-list" ng-repeat="reply in replyList" style=" width: 100%;">
             <div style="width:40px ;float:left;padding-right:5px;">
-                <img src="../public/images/images.jpg" alt="..." class="img-thumbnail img-responsive" style="display: inline" />
+                <img src="../public/images/images.jpg" alt="..." class="img-thumbnail img-responsive"
+                     style="display: inline"/>
             </div>
             <div style=" margin-left:45px;">
                 <div style=" float:right">
-                    <p style="font-size:11px;color: #838383 ;padding-left:15px;"><a> {{reply.author.name}}</a>  回复于  {{reply.replyTime|date:'yyyy-MM-dd HH:mm'}}</p>
+                    <p style="font-size:11px;color: #838383 ;padding-left:15px;"><a> {{reply.author.name}}</a> 回复于
+                        {{reply.replyTime|date:'yyyy-MM-dd HH:mm'}}</p>
                 </div>
-                <div style=" white-space: pre-wrap; word-wrap: break-word; margin-top: 7px" ng-bind-html="reply.contentHtml"></div>
+                <div style=" white-space: pre-wrap; word-wrap: break-word; margin-top: 7px"
+                     ng-bind-html="reply.contentHtml"></div>
             </div>
         </div>
-        <div ng-hide="replyList.length!=0" >暂无回复</div>
+        <div ng-hide="replyList.length!=0">暂无回复</div>
     </div>
 </div>
 
@@ -55,6 +63,7 @@
             </div>
             <div style="display:table-cell"></div>
         </div>-->
-        <textarea class="edit-body " style="height:250px;" ng-model='reply.contents' onkeydown="if(event.keyCode==9){this.value+='    ';return false;}"></textarea>
+        <textarea class="edit-body " style="height:250px;" ng-model='reply.contents'
+                  onkeydown="if(event.keyCode==9){this.value+='    ';return false;}"></textarea>
     </div>
 </div>
